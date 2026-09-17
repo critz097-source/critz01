@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRITZ ADMIN</title>
+<style>
+:root{--red:#e10600;--bg:#0a0a0a;--card:#141414;--border:#242424;--input:#1a1a1a;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{background:var(--bg);color:#fff;min-height:100vh;padding:24px 16px;}
+.wrap{max-width:760px;margin:0 auto}
+.top{display:flex;justify-content:space-between;align-items:center;padding:8px 0 18px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.logo{font-weight:900;letter-spacing:2px;font-size:13px}.logo span{color:var(--red)}
+.shop-link{font-size:11px;font-weight:900;letter-spacing:1px;text-decoration:none;color:#fff;opacity:0.9}
+h1{font-size:22px;font-weight:900;margin-bottom:8px}
+.sub{font-size:12px;opacity:0.5;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:18px}
+label{font-size:10px;letter-spacing:1px;opacity:0.5;margin-bottom:6px;display:block;text-transform:uppercase}
+input{width:100%;background:var(--input);border:1px solid #2a2a2a;color:#fff;padding:12px 14px;border-radius:10px;font-size:13px;outline:none}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.full{margin-bottom:14px}
+.btn-row{display:flex;gap:10px;margin-top:16px}
+.btn{border:none;padding:12px 18px;border-radius:10px;font-weight:900;font-size:11px;letter-spacing:0.8px;cursor:pointer}
+.btn-add{background:var(--red);color:#fff}
+.btn-clear{background:#fff;color:#000}
+.btn-edit{background:#fff;color:#000;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:900}
+.btn-del{background:#262626;color:#fff;padding:10px 16px;border-radius:8px;font-size:11px;font-weight:900}
+.prod-head{font-size:14px;font-weight:900;margin-bottom:16px}
+.prod-item{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid #1f1f1f}
+.prod-title{font-size:12px;font-weight:900;margin-bottom:4px}
+.prod-meta{font-size:10px;opacity:0.45}
+.prod-actions{display:flex;gap:8px}
+.note{font-size:11px;opacity:0.4;line-height:1.5;margin-bottom:14px}
+.btn-reset{background:#222;color:#fff;border:1px solid #333;padding:12px 18px;border-radius:10px;font-weight:900;font-size:11px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="logo">CRI<span>TZ</span> ADMIN</div>
+    <a href="products.html" class="shop-link">← SHOP</a>
+  </div>
+  <h1>Product Control Room</h1>
+  <p class="sub">Manage the products displayed on your shop.</p>
+  <div class="card">
+    <div class="grid">
+      <div><label>NAME</label><input id="name" placeholder="e.g. CRITZ HOODIE"></div>
+      <div><label>PRICE (₦)</label><input id="price" type="number" placeholder="e.g. 15000"></div>
+    </div>
+    <div class="grid">
+      <div><label>FRONT IMAGE</label><input id="front" placeholder="hoodie.png"></div>
+      <div><label>BACK IMAGE</label><input id="back" placeholder="hoodie-back.png"></div>
+    </div>
+    <div class="full"><label>SIZES (COMMA SEPARATED)</label><input id="sizes" placeholder="S, M, L, XL, XXL"></div>
+    <div class="btn-row">
+      <button class="btn btn-add" onclick="saveProduct()">ADD PRODUCT</button>
+      <button class="btn btn-clear" onclick="clearForm()">CLEAR</button>
+    </div>
+  </div>
+  <div class="card">
+    <div class="prod-head">Products List</div>
+    <div id="list"></div>
+  </div>
+  <div class="card">
+    <p class="note">Note: this admin uses browser localStorage, so changes are saved on this device/browser only. It is not a secure server-side admin system yet. Connected to Vercel API when available.</p>
+    <button class="btn-reset" onclick="resetProducts()">RESET ORIGINAL PRODUCTS</button>
+  </div>
+</div>
+<script>
+const ORIGINALS = [
+  {id:1,title:"LONG SLEEVE TEE",price:35000,images:["longsleeve.png","longsleeve-back.png"],sizes:["S","M","L","XL","XXL"]},
+  {id:2,title:"CRITZ HOODIE",price:40000,images:["hoodie.png","hoodie-back.png"],sizes:["M","L","XL","XXL"]},
+  {id:3,title:"GRAPHIC SLEEVELESS TEE",price:25000,images:["harmlesstee.png","harmlesstee-back.png"],sizes:["S","M","L","XL"]}
+];
+let products = JSON.parse(localStorage.getItem('critz_products')||'null') || [...ORIGINALS];
+let editId = null;
+function render(){
+  document.getElementById('list').innerHTML = products.map(p=>`
+    <div class="prod-item">
+      <div><div class="prod-title">${p.title}</div><div class="prod-meta">₦${p.price.toLocaleString()} · ${p.sizes.join(', ')}</div></div>
+      <div class="prod-actions"><button class="btn btn-edit" onclick="editProduct(${p.id})">EDIT</button><button class="btn btn-del" onclick="deleteProduct(${p.id})">DELETE</button></div>
+    </div>`).join('');
+}
+function saveProduct(){
+  let title=document.getElementById('name').value.trim();
+  let price=parseInt(document.getElementById('price').value);
+  let front=document.getElementById('front').value.trim()||'placeholder.png';
+  let back=document.getElementById('back').value.trim();
+  let sizes=document.getElementById('sizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+  if(!title||!price){alert('Name & Price required');return}
+  if(sizes.length==0) sizes=["S","M","L","XL"];
+  let images=back?[front,back]:[front];
+  if(editId){let p=products.find(x=>x.id===editId);p.title=title;p.price=price;p.images=images;p.sizes=sizes;editId=null;}
+  else{let id=products.length?Math.max(...products.map(x=>x.id))+1:1;products.push({id,title,price,images,sizes});}
+  localStorage.setItem('critz_products',JSON.stringify(products));
+  fetch('/api/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(products[products.length-1])}).catch(()=>{});
+  clearForm();render();
+}
+function editProduct(id){let p=products.find(x=>x.id===id);editId=id;document.getElementById('name').value=p.title;document.getElementById('price').value=p.price;document.getElementById('front').value=p.images[0]||'';document.getElementById('back').value=p.images[1]||'';document.getElementById('sizes').value=p.sizes.join(', ');window.scrollTo({top:0,behavior:'smooth'});}
+function deleteProduct(id){if(!confirm('Delete?'))return;products=products.filter(x=>x.id!==id);localStorage.setItem('critz_products',JSON.stringify(products));fetch('/api/products?id='+id,{method:'DELETE'}).catch(()=>{});render();}
+function clearForm(){editId=null;['name','price','front','back','sizes'].forEach(i=>document.getElementById(i).value='')}
+function resetProducts(){if(!confirm('Reset?'))return;products=[...ORIGINALS];localStorage.setItem('critz_products',JSON.stringify(products));render();}
+render();
+</script>
+</body>
+</html>
