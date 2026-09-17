@@ -1,0 +1,29 @@
+let products = [
+  { id: 1, title: "LONG SLEEVE TEE", price: 35000, images: ["longsleeve.png", "longsleeve-back.png"], sizes: ["S","M","L","XL","XXL"] },
+  { id: 2, title: "CRITZ HOODIE", price: 40000, images: ["hoodie.png", "hoodie-back.png"], sizes: ["M","L","XL","XXL"] },
+  { id: 3, title: "GRAPHIC SLEEVELESS TEE", price: 25000, images: ["harmlesstee.png", "harmlesstee-back.png"], sizes: ["S","M","L","XL"] }
+];
+
+export default function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (req.method === 'GET') {
+    return res.status(200).json(products);
+  }
+  
+  // This makes your admin room from your screenshot work
+  if (req.method === 'POST') {
+    const body = req.body;
+    const newP = { id: Date.now(), title: body.title, price: parseInt(body.price), images: body.images, sizes: body.sizes };
+    products.push(newP);
+    return res.status(200).json(newP);
+  }
+
+  if (req.method === 'DELETE') {
+    const id = parseInt(req.query.id);
+    products = products.filter(p => p.id !== id);
+    return res.status(200).json({ ok: true });
+  }
+}
