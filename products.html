@@ -2,67 +2,88 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>SHOP - CRITZ</title>
 <style>
 :root{--red:#e10600}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
 body{
   background:#000 url('https://i.pinimg.com/1200x/c6/f5/71/c6f571c6e70de06b3485e3fb833f615d.jpg') no-repeat center center fixed;
-  background-size:cover;color:#fff;overflow-x:hidden;
+  background-size:cover;color:#fff;
 }
-body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:-1}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.68);z-index:-1}
 body.no-scroll{overflow:hidden}
 
-/* HOME NAV BAR - GLASSY */
+/* HOME NAV - GLASSY */
 header{
-  position:fixed;top:0;width:100%;padding:12px 18px;
+  position:fixed;top:0;width:100%;padding:12px 14px;
   display:flex;justify-content:space-between;align-items:center;z-index:20;
-  background:rgba(0,0,0,0.35);
-  backdrop-filter:blur(18px);
+  background:rgba(0,0,0,0.45);backdrop-filter:blur(18px);
   -webkit-backdrop-filter:blur(18px);
   border-bottom:1px solid rgba(255,255,255,0.12);
 }
-.logo{font-size:20px;font-weight:900;letter-spacing:1px}.logo span{color:var(--red)}
-.nav{display:flex;gap:22px;align-items:center}
-.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:11px;font-weight:800;letter-spacing:1px;transition:0.2s}
-.nav a:hover,.nav a.active{color:#fff}
-.nav a.cart-link{position:relative}
-.cart-badge{
-  background:var(--red);color:#fff;font-size:9px;
-  padding:2px 5px;border-radius:10px;margin-left:4px;font-weight:900;
-}
+.logo{font-size:18px;font-weight:900;letter-spacing:1px}.logo span{color:var(--red)}
+.nav{display:flex;gap:12px;align-items:center}
+.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:10px;font-weight:800;letter-spacing:0.5px;padding:6px 4px}
+.nav a.active{color:#fff;border-bottom:1px solid var(--red)}
+.cart-badge{background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:10px;margin-left:3px;font-weight:900}
 
-/* PRODUCTS - GLASSY + 3 PER ROW LAPTOP */
-.products{padding:70px 10px 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:1400px;margin:0 auto;position:relative;z-index:1}
+/* PRODUCTS GRID - PERFECT FIT */
+.products{
+  padding:70px 10px 30px;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:10px;max-width:1400px;margin:0 auto;position:relative;z-index:1;
+}
 .product-card{
-  background:rgba(15,15,15,0.45);backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
+  background:rgba(15,15,15,0.50);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,0.15);
   border-radius:14px;overflow:hidden;text-align:center;
+  display:flex;flex-direction:column;
   box-shadow:0 8px 32px rgba(0,0,0,0.5);
 }
-.product-card img{width:100%;height:135px;object-fit:contain;background:rgba(255,255,255,0.92);display:block;padding:6px}
-.product-card h3{font-size:9px;margin:10px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.5px}
+.img-wrap{
+  width:100%;aspect-ratio:1 / 1;overflow:hidden;background:#111;
+  position:relative;
+}
+.img-wrap img{
+  width:100%;height:100%;
+  object-fit:cover; /* PERFECT FIT */
+  object-position:center top;
+  display:block;transition:transform 0.4s ease;
+}
+.product-card:hover.img-wrap img{transform:scale(1.06)}
+.product-card h3{font-size:9px;margin:10px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.5px;font-weight:800}
 .price{color:var(--red);font-size:13px;font-weight:900;margin-bottom:8px}
 .view-btn{
-  width:calc(100% - 12px);background:rgba(225,6,0,0.9);
+  width:calc(100% - 12px);background:rgba(225,6,0,0.92);
   backdrop-filter:blur(10px);color:#fff;
   border:1px solid rgba(255,255,255,0.15);
-  padding:10px;border-radius:8px;font-size:10px;font-weight:900;margin:0 6px 8px;
+  padding:11px;border-radius:8px;font-size:10px;font-weight:900;
+  margin:0 6px 8px;min-height:38px;
 }
 
+/* LAPTOP 3 PER ROW */
+@media(min-width:768px){
+ .products{gap:14px;padding:80px 16px 30px}
+ .img-wrap{aspect-ratio:4/5}
+}
 @media(min-width:1024px){
-.products{grid-template-columns:repeat(3,1fr);gap:18px;padding:90px 30px;max-width:1000px}
-.product-card img{height:160px}
+ .products{grid-template-columns:repeat(3,1fr);gap:18px;padding:90px 30px;max-width:1000px}
+ .nav{gap:20px}.nav a{font-size:11px}.logo{font-size:20px}
+}
+@media(max-width:360px){
+ .products{gap:8px;padding:68px 8px 20px}
+  header{padding:10px 10px}.nav{gap:8px}.nav a{font-size:9px}
 }
 
-/* GLASSY DRAWER - RIGHT SIDE + REDUCED BOX */
+/* GLASSY DRAWER - RIGHT SIDE REDUCED BOX */
 .drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:999;opacity:0;visibility:hidden;transition:0.3s}
 .drawer-overlay.active{opacity:1;visibility:visible}
 .drawer{
   position:fixed;top:0;right:-100%;width:86%;max-width:340px;height:100%;
-  background:rgba(10,10,10,0.75);backdrop-filter:blur(22px);
+  background:rgba(10,10,10,0.82);backdrop-filter:blur(22px);
   -webkit-backdrop-filter:blur(22px);
   border-left:1px solid rgba(255,255,255,0.15);
   z-index:1000;transition:right 0.38s cubic-bezier(0.32,0.72,0,1);
@@ -74,7 +95,7 @@ header{
 .close-x{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:20px;display:grid;place-items:center}
 .drawer-img-wrap{background:transparent;width:100%;height:30vh;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:12px 14px}
 .drawer-img-wrap::-webkit-scrollbar{display:none}
-.drawer-img-wrap img{width:70%;min-width:70%;height:100%;object-fit:contain;background:rgba(255,255,255,0.92);border-radius:14px;scroll-snap-align:center;border:1px solid rgba(255,255,255,0.2)}
+.drawer-img-wrap img{width:70%;min-width:70%;height:100%;object-fit:cover;border-radius:14px;scroll-snap-align:center;border:1px solid rgba(255,255,255,0.2);background:#111}
 .dots-wrap{display:flex;gap:5px;justify-content:center;padding:8px 0}
 .dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25);transition:0.2s}
 .dot.active{background:#fff;width:16px}
@@ -88,30 +109,48 @@ header{
 .qty-box{display:flex;align-items:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;width:150px;overflow:hidden;margin-bottom:18px}
 .qty-btn{width:48px;height:42px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:18px}
 .qty-num{flex:1;text-align:center;font-weight:900;font-size:14px}
-.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:rgba(0,0,0,0.5);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:8px}
-.btn-big{width:100%;padding:14px;border:none;border-radius:10px;font-weight:900;font-size:11px;border:1px solid rgba(255,255,255,0.15)}
+.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:rgba(0,0,0,0.6);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:8px}
+.btn-big{width:100%;padding:14px;border:none;border-radius:10px;font-weight:900;font-size:11px;border:1px solid rgba(255,255,255,0.15);min-height:46px}
 .btn-cart{background:rgba(255,255,255,0.9);color:#000}
 .btn-buy{background:rgba(225,6,0,0.9);color:#fff}
 </style>
 </head>
 <body>
-<!-- HOME NAV BAR -->
+
 <header>
   <div class="logo">CRI<span>TZ</span></div>
   <div class="nav">
     <a href="index.html">HOME</a>
     <a href="products.html" class="active">SHOP</a>
-    <a href="cart.html" class="cart-link">CART <span class="cart-badge" id="nav-cart">0</span></a>
+    <a href="cart.html">CART <span class="cart-badge" id="nav-cart">0</span></a>
   </div>
 </header>
 
 <section class="products">
-  <div class="product-card"><img src="sleeve.png" onclick="openDrawer('longsleeve')"><h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button></div>
-  <div class="product-card"><img src="sleeve2.png" onclick="openDrawer('hoodie')"><h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button></div>
-  <div class="product-card"><img src="joggers.png" onclick="openDrawer('sleeveless')"><h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button></div>
-  <div class="product-card"><img src="joggers2.png" onclick="openDrawer('longsleeve')"><h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button></div>
-  <div class="product-card"><img src="tees.png" onclick="openDrawer('hoodie')"><h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button></div>
-  <div class="product-card"><img src="tees2.png" onclick="openDrawer('sleeveless')"><h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button></div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="sleeve.png" onerror="this.src='https://via.placeholder.com/600x600/111111/ffffff?text=CRITZ'"></div>
+    <h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button>
+  </div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="sleeve2.png"></div>
+    <h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button>
+  </div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="jorts.png"></div>
+    <h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button>
+  </div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="jorts2.png"></div>
+    <h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button>
+  </div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="tees.png"></div>
+    <h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button>
+  </div>
+  <div class="product-card">
+    <div class="img-wrap"><img src="tees2.png"></div>
+    <h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button>
+  </div>
 </section>
 
 <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
@@ -134,8 +173,8 @@ header{
 
 <script>
 const products={
-  longsleeve:{title:"LONG SLEEVE TEE",price:35000,images:["longsleeve.png","longsleeve-back.png","longsleeve-detail.png"],sizes:["M","L","XL","XXL"]},
-  hoodie:{title:"CRITZ HOODIE",price:40000,images:["hoodie.png","hoodie-back.png","hoodie-side.png"],sizes:["M","L","XL","XXL"]},
+  longsleeve:{title:"LONG SLEEVE TEE",price:35000,images:["longsleeve.png","longsleeve-back.png"],sizes:["M","L","XL","XXL"]},
+  hoodie:{title:"CRITZ HOODIE",price:40000,images:["hoodie.png","hoodie-back.png"],sizes:["M","L","XL","XXL"]},
   sleeveless:{title:"GRAPHIC SLEEVELESS TEE",price:25000,images:["harmlesstee.png","harmlesstee-back.png"],sizes:["M","L","XL"]}
 };
 let currentProduct=null,selectedSize=null,qty=1;
@@ -146,7 +185,7 @@ function openDrawer(id){
  document.getElementById('drawer-price').innerText=`₦${currentProduct.price.toLocaleString()}.00`;
  document.getElementById('qty').innerText=qty;
  const imgDiv=document.getElementById('drawer-images');imgDiv.innerHTML='';
- currentProduct.images.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" onerror="this.src='https://via.placeholder.com/600x600/ffffff/000000?text=CRITZ'">`;});
+ currentProduct.images.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" onerror="this.src='https://via.placeholder.com/600x600/111/fff?text=CRITZ'">`;});
  const dotsDiv=document.getElementById('dots');dotsDiv.innerHTML='';
  currentProduct.images.forEach((_,k)=>{dotsDiv.innerHTML+=`<div class="dot ${k===0?'active':''}"></div>`;});
  imgDiv.onscroll=()=>{let i=Math.round(imgDiv.scrollLeft/(imgDiv.clientWidth*0.7));document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));};

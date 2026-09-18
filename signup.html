@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>SIGN UP - CRITZ</title>
+<style>
+:root{--red:#e10600}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden}
+body{
+  background:#000 url('background.jpg') no-repeat center center fixed;
+  background-size:cover;color:#fff;min-height:100vh;
+  display:flex;flex-direction:column;
+}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.70);z-index:-1}
+
+header{
+  position:fixed;top:0;width:100%;padding:12px 14px;
+  display:flex;justify-content:space-between;align-items:center;z-index:20;
+  background:rgba(0,0,0,0.45);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid rgba(255,255,255,0.12);
+}
+.logo{font-size:18px;font-weight:900}.logo span{color:var(--red)}
+.nav{display:flex;gap:12px;align-items:center}
+.nav a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:10px;font-weight:800;padding:6px 4px}
+.nav a.active{color:#fff;border-bottom:1px solid var(--red)}
+
+.wrap{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:72px 12px 20px;position:relative;z-index:1;width:100%;
+}
+.signup-card{
+  width:100%;max-width:100%;
+  background:rgba(15,15,15,0.55);backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:18px;padding:22px 16px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.6);
+}
+.signup-card h1{font-size:18px;font-weight:900;margin-bottom:6px}
+.signup-card p.sub{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:18px;line-height:1.4}
+
+.field{margin-bottom:12px}
+.field label{font-size:9px;letter-spacing:1.5px;color:rgba(255,255,255,0.5);display:block;margin-bottom:6px;font-weight:700}
+.field input{
+  width:100%;padding:15px 14px;
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);
+  border-radius:10px;color:#fff;font-size:16px;outline:none;
+}
+.field input:focus{border-color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.10)}
+.field input::placeholder{color:rgba(255,255,255,0.35)}
+
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.check{font-size:11px;color:rgba(255,255,255,0.6);display:flex;gap:6px;align-items:flex-start;margin:12px 0 16px;line-height:1.4}
+.check input{margin-top:2px;width:16px;height:16px;accent-color:var(--red);flex-shrink:0}
+.check a{color:#fff;font-weight:700;text-decoration:none}
+
+.btn-signup{
+  width:100%;padding:16px;background:rgba(225,6,0,0.95);
+  border:1px solid rgba(255,255,255,0.15);color:#fff;
+  border-radius:12px;font-weight:900;font-size:12px;letter-spacing:1px;min-height:50px;
+}
+.divider{display:flex;align-items:center;gap:10px;margin:16px 0;color:rgba(255,255,255,0.3);font-size:10px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:rgba(255,255,255,0.1)}
+.btn-google{
+  width:100%;padding:15px;background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);color:#fff;border-radius:12px;
+  font-weight:800;font-size:12px;display:flex;justify-content:center;gap:8px;
+  min-height:50px;align-items:center;
+}
+.login{text-align:center;margin-top:18px;font-size:11px;color:rgba(255,255,255,0.5)}
+.login a{color:#fff;font-weight:800;text-decoration:none;margin-left:4px}
+.login a span{color:var(--red)}
+
+@media(min-width:480px){
+  .signup-card{max-width:400px;padding:26px 20px}
+  .nav{gap:18px}.nav a{font-size:11px}.logo{font-size:20px}
+}
+@media(min-width:1024px){
+  .wrap{padding:90px 20px 30px}
+  .signup-card{max-width:420px;padding:30px 26px;border-radius:20px}
+  .signup-card h1{font-size:20px}
+}
+@media(max-width:360px){
+  header{padding:10px 10px}.nav{gap:8px}.nav a{font-size:9px}
+  .signup-card{padding:18px 12px}.wrap{padding:68px 8px 16px}
+  .row2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">CRI<span>TZ</span></div>
+  <div class="nav">
+    <a href="index.html">HOME</a>
+    <a href="products.html">SHOP</a>
+    <a href="login.html">LOGIN</a>
+    <a href="signup.html" class="active">SIGN UP</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="signup-card">
+    <h1>CREATE ACCOUNT</h1>
+    <p class="sub">Join CRITZ family - new drops, early access</p>
+
+    <div class="row2">
+      <div class="field">
+        <label>FIRST NAME</label>
+        <input type="text" id="fname" placeholder="John" autocomplete="given-name">
+      </div>
+      <div class="field">
+        <label>LAST NAME</label>
+        <input type="text" id="lname" placeholder="Doe" autocomplete="family-name">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>EMAIL ADDRESS</label>
+      <input type="email" id="email" placeholder="you@example.com" inputmode="email" autocomplete="email">
+    </div>
+
+    <div class="field">
+      <label>PASSWORD</label>
+      <input type="password" id="pass" placeholder="Min 8 characters" autocomplete="new-password">
+    </div>
+
+    <div class="field">
+      <label>CONFIRM PASSWORD</label>
+      <input type="password" id="cpass" placeholder="Repeat password" autocomplete="new-password">
+    </div>
+
+    <label class="check">
+      <input type="checkbox" id="terms">
+      <span>I agree to CRITZ <a href="#">Terms</a> & <a href="#">Privacy Policy</a></span>
+    </label>
+
+    <button class="btn-signup" onclick="doSignup()">CREATE ACCOUNT</button>
+
+    <div class="divider">OR</div>
+
+    <button class="btn-google" onclick="googleSignup()">G Sign up with Google</button>
+
+    <div class="login">Already have account? <a href="login.html">LOGIN <span>→</span></a></div>
+  </div>
+</div>
+
+<script>
+function doSignup(){
+  let f=document.getElementById('fname').value.trim();
+  let l=document.getElementById('lname').value.trim();
+  let e=document.getElementById('email').value.trim();
+  let p=document.getElementById('pass').value.trim();
+  let cp=document.getElementById('cpass').value.trim();
+  let t=document.getElementById('terms').checked;
+  
+  if(!f||!l||!e||!p||!cp){alert('Fill all fields');return}
+  if(p.length<8){alert('Password must be 8+ chars');return}
+  if(p!==cp){alert('Passwords no match');return}
+  if(!t){alert('Accept Terms');return}
+  
+  localStorage.setItem('critzUser',JSON.stringify({firstName:f,lastName:l,email:e}));
+  alert('Account created for '+f);
+  location.href='products.html';
+}
+function googleSignup(){alert('Connect Firebase Google Auth here')}
+</script>
+</body>
+</html>

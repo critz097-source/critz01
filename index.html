@@ -16,8 +16,10 @@ header{position:absolute;top:0;width:100%;padding:20px 25px;display:flex;justify
 .logo{font-size:24px;letter-spacing:4px;text-shadow:0 0 20px var(--red)}
 .location{font-size:9px;letter-spacing:2.5px;margin-top:3px}
 .location span{color:var(--red)}
-.nav-right{display:flex;align-items:center;gap:22px}
+.nav-right{display:flex;align-items:center;gap:18px}
 .login-link{color:#fff;text-decoration:none;font-size:12px;letter-spacing:1px;font-family:'Inter',sans-serif;font-weight:600}
+.signup-btn{border:1px solid rgba(255,255,255,0.25);padding:7px 16px;border-radius:20px;background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);transition:0.2s}
+.signup-btn:hover{background:rgba(255,255,255,0.15);border-color:#fff}
 .cart-wrap{position:relative;display:flex;text-decoration:none}
 .cart-wrap svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8}
 .center-content{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:30px;text-align:center;width:100%;padding:0 20px}
@@ -28,17 +30,23 @@ header{position:absolute;top:0;width:100%;padding:20px 25px;display:flex;justify
 .snap-s{font-size:22px;color:#fff}
 .socials a{text-decoration:none;color:#fff;display:flex;align-items:center}
 @media(max-width:768px){
-  header{padding:12px 16px;background:rgba(0,0,0,0.32);border-bottom:1.5px solid rgba(225,6,0,0.5);backdrop-filter:blur(12px)}
-  .logo{font-size:18px;letter-spacing:3px}
-  .location{font-size:6.5px;letter-spacing:1.5px;margin-top:2px;opacity:0.8}
-  .nav-right{gap:14px}
-  .login-link{font-size:11px}
+  header{padding:12px 12px;background:rgba(0,0,0,0.32);border-bottom:1.5px solid rgba(225,6,0,0.5);backdrop-filter:blur(12px)}
+  .logo{font-size:16px;letter-spacing:2.5px}
+  .location{font-size:6px;letter-spacing:1.2px;margin-top:2px;opacity:0.8}
+  .nav-right{gap:10px}
+  .login-link{font-size:10px}
+  .signup-btn{padding:5px 10px;font-size:9px}
   .center-content{gap:20px;width:92%}
   .slogan{font-size:clamp(22px, 7.5vw, 28px);letter-spacing:3px;line-height:1.1}
   .center-btn a{padding:13px 32px;font-size:11px;letter-spacing:3px;border-radius:30px}
   .socials{bottom:calc(16px + env(safe-area-inset-bottom));padding:10px 22px;gap:20px;border-radius:30px;max-width:90%}
   .socials a svg{width:20px;height:20px}
   .snap-s{font-size:18px}
+}
+@media(max-width:360px){
+  .nav-right{gap:8px}
+  .login-link{font-size:9px}
+  .signup-btn{padding:4px 8px}
 }
 </style>
 </head>
@@ -53,6 +61,7 @@ header{position:absolute;top:0;width:100%;padding:20px 25px;display:flex;justify
     <div><div class="logo">CRITZ</div><div class="location">LAGOS NIGERIA - <span>SHIPPING WORLDWIDE</span></div></div>
     <div class="nav-right">
       <a href="login.html" class="login-link">LOGIN</a>
+      <a href="signup.html" class="login-link signup-btn">SIGN UP</a>
       <a href="cart.html" class="cart-wrap">
         <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 01-8 0"/></svg>
       </a>
