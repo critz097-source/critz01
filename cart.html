@@ -2,103 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CART - CRITZ</title>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
 :root{--red:#e10600}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{
-  background:#000 url('background.jpg') no-repeat center center fixed;
-  background-size:cover;color:#fff;min-height:100vh;
-}
-body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.70);z-index:-1}
-
-/* GLASSY NAV */
-header{
-  position:fixed;top:0;width:100%;padding:14px 16px;
-  display:flex;justify-content:space-between;align-items:center;z-index:10;
-  background:rgba(0,0,0,0.35);backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,0.12);
-}
-.logo{font-size:20px;font-weight:900}.logo span{color:var(--red)}
-.nav{display:flex;gap:16px}.nav a{color:#fff;text-decoration:none;font-size:11px;font-weight:800}
-
-.wrap{padding:75px 12px 30px;max-width:700px;margin:0 auto;position:relative;z-index:1}
-.title{font-size:22px;font-weight:900;margin-bottom:4px;letter-spacing:1px}
-.sub{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:18px;letter-spacing:1px}
-
-/* GLASSY CART ITEM */
-.cart-item{
-  background:rgba(15,15,15,0.45);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:14px;
-  display:flex;gap:12px;padding:12px;margin-bottom:10px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.4);
-}
-.cart-item img{
-  width:80px;height:80px;object-fit:contain;
-  background:rgba(255,255,255,0.92);border-radius:10px;
-  border:1px solid rgba(255,255,255,0.2);
-}
-.cart-info{flex:1}
-.cart-info h3{font-size:12px;font-weight:800;margin-bottom:3px}
-.cart-info p{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:6px}
-.cart-price{color:var(--red);font-weight:900;font-size:14px}
-.qty-row{display:flex;align-items:center;gap:8px;margin-top:8px}
-.q-btn{
-  width:32px;height:32px;border-radius:8px;
-  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);
-  color:#fff;font-size:16px;backdrop-filter:blur(10px);
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial;-webkit-tap-highlight-color:transparent}
+html,body{overflow-x:hidden;width:100%}
+body{background:#000 url('background.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh;min-height:100dvh}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:-1}
+header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(0,0,0,0.55);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.12)}
+.logo{font-size:18px;font-weight:900}.logo span{color:var(--red)}
+.nav{display:flex;gap:10px;align-items:center}.nav a{color:#fff;text-decoration:none;font-size:11px;font-weight:800;padding:8px 6px;border-radius:6px;min-height:36px;display:flex;align-items:center}.nav a.active{background:rgba(255,255,255,0.1)}
+.wrap{padding:68px 10px 24px;max-width:600px;margin:0 auto;width:100%}
+.title{font-size:18px;font-weight:900;margin-bottom:2px}.sub{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:12px}
+.cart-item{background:rgba(18,18,18,0.6);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;display:flex;overflow:hidden;margin-bottom:10px;min-height:92px}
+.img-box{width:88px;min-width:88px;height:92px;background:#0e0e0e}.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.cart-info{flex:1;padding:10px 10px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.cart-info h3{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-info p{font-size:9px;color:rgba(255,255,255,0.5);margin:2px 0}
+.cart-price{color:var(--red);font-weight:900;font-size:13px}
+.qty-row{display:flex;align-items:center;gap:6px;margin-top:8px}
+.q-btn{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:18px;display:grid;place-items:center}
 .q-num{font-size:13px;font-weight:800;min-width:20px;text-align:center}
-.remove{
-  background:rgba(225,6,0,0.15);border:1px solid rgba(225,6,0,0.3);
-  color:var(--red);padding:6px 10px;border-radius:8px;
-  font-size:10px;font-weight:800;margin-left:auto;backdrop-filter:blur(10px);
-}
-
-/* GLASSY SUMMARY */
-.summary{
-  margin-top:20px;
-  background:rgba(15,15,15,0.45);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.15);
-  border-radius:16px;padding:16px;
-  box-shadow:0 8px 32px rgba(0,0,0,0.5);
-}
-.row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:10px;color:rgba(255,255,255,0.7)}
-.row.total{font-size:16px;font-weight:900;color:#fff;border-top:1px solid rgba(255,255,255,0.1);padding-top:12px;margin-top:8px}
-.checkout{
-  width:100%;margin-top:14px;padding:16px;
-  background:rgba(225,6,0,0.9);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.15);
-  color:#fff;border-radius:12px;font-weight:900;font-size:12px;letter-spacing:1px;
-  box-shadow:0 4px 20px rgba(225,6,0,0.4);
-}
-.continue{
-  width:100%;margin-top:10px;padding:14px;
-  background:rgba(255,255,255,0.08);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.15);
-  color:#fff;border-radius:12px;font-weight:800;font-size:11px;
-}
-.empty{
-  text-align:center;padding:60px 20px;
-  background:rgba(15,15,15,0.35);backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,0.12);border-radius:16px;
-}
-.empty h2{font-size:16px;margin-bottom:8px}
-.empty p{font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:16px}
-.empty a{color:var(--red);text-decoration:none;font-weight:800;font-size:12px}
+.remove{margin-left:auto;background:rgba(225,6,0,0.18);border:1px solid rgba(225,6,0,0.35);color:#ff6b6b;padding:8px 12px;border-radius:9px;font-size:9px;font-weight:800;min-height:36px}
+.summary{margin-top:14px;background:rgba(18,18,18,0.65);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:12px}
+.delivery-box{margin-bottom:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:10px}
+.delivery-options{display:flex;gap:8px;margin-bottom:10px}
+.delivery-opt{flex:1;padding:12px 8px;border-radius:11px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);text-align:center;cursor:pointer;min-height:58px;display:flex;flex-direction:column;justify-content:center}
+.delivery-opt.active{background:#fff;color:#000;border-color:#fff}.delivery-opt.active span{color:rgba(0,0,0,0.6)}
+.delivery-opt b{font-size:11px;display:block}.delivery-opt span{font-size:9px;color:rgba(255,255,255,0.55)}
+.note{font-size:10px;color:rgba(255,255,255,0.65);line-height:1.5;margin-bottom:12px;background:rgba(225,6,0,0.10);border:1px solid rgba(225,6,0,0.22);padding:10px;border-radius:11px}
+.ship-select-wrap{display:none}.ship-select-wrap.show{display:block}
+.ship-select{width:100%;padding:14px 12px;background:rgba(0,0,0,0.55);border:1px solid rgba(255,255,255,0.18);border-radius:12px;color:#fff;font-size:14px;font-weight:700;outline:none;margin-bottom:12px;min-height:48px}
+.ship-select option{background:#111}
+.other-state-box{display:none;margin-bottom:12px}.other-state-box.show{display:block}
+.addr-title{font-size:9px;letter-spacing:2px;color:rgba(255,255,255,0.6);margin:14px 0 10px;font-weight:800}
+.input-group{margin-bottom:10px;width:100%}.input-group label{font-size:9px;color:rgba(255,255,255,0.55);margin-bottom:6px;display:block}
+.input-group input{width:100%;padding:14px 12px;background:rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.18);border-radius:12px;color:#fff;font-size:15px;outline:none;min-height:48px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
+.row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:10px;color:rgba(255,255,255,0.75)}
+.row.total{font-size:16px;font-weight:900;color:#fff;border-top:1px solid rgba(255,255,255,0.12);padding-top:12px;margin-top:12px}
+.checkout{width:100%;margin-top:14px;padding:16px;background:var(--red);border:none;color:#fff;border-radius:13px;font-weight:900;font-size:12px;min-height:52px;letter-spacing:1px}
+.continue{width:100%;margin-top:10px;padding:15px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:13px;font-weight:800;font-size:11px;min-height:50px}
+.empty{text-align:center;padding:44px 16px;background:rgba(18,18,18,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:16px}
+@media(max-width:360px){.grid2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">CRI<span>TZ</span></div>
-  <div class="nav"><a href="products.html">SHOP</a><a href="cart.html">🛍️ CART (<span id="cart-count">0</span>)</a></div>
+  <div class="nav"><a href="products.html">SHOP</a><a href="cart.html" class="active">🛍️ (<span id="cart-count">0</span>)</a></div>
 </header>
 
 <div class="wrap">
@@ -107,67 +61,155 @@ header{
   <div id="cart-list"></div>
   <div id="summary-box" style="display:none">
     <div class="summary">
+      <div class="delivery-box">
+        <div class="delivery-options">
+          <div class="delivery-opt active" id="opt-delivery" onclick="setDelivery('delivery')"><b>DELIVERY</b><span>Pay with order</span></div>
+          <div class="delivery-opt" id="opt-pickup" onclick="setDelivery('pickup')"><b>SELF PICKUP</b><span>Free</span></div>
+        </div>
+        <div class="note"><b>⏱ Delivery takes 1-2 weeks</b><br>Delivery fee paid with order via Paystack.</div>
+        <div class="ship-select-wrap show" id="ship-wrap">
+          <select class="ship-select" id="state" onchange="handleStateChange()">
+            <option value="" disabled selected>Select delivery region</option>
+            <option value="6800">Lagos - ₦6,800</option>
+            <option value="7000">Ibadan - ₦7,000</option>
+            <option value="7000">Calabar - ₦7,000</option>
+            <option value="8500">Abuja - ₦8,500</option>
+            <option value="8500">Other States - ₦8,500</option>
+          </select>
+          <div class="other-state-box" id="otherStateBox">
+            <div class="input-group"><label>Enter Your State *</label><input type="text" id="otherState" placeholder="e.g. Enugu, Kano..." oninput="calcTotal()"></div>
+          </div>
+          <div class="addr-title">SHIPPING ADDRESS *</div>
+          <div class="grid2">
+            <div class="input-group"><label>Full Name *</label><input type="text" id="fullName" placeholder="John Doe"></div>
+            <div class="input-group"><label>Phone *</label><input type="tel" id="phone" placeholder="080..."></div>
+          </div>
+          <div class="input-group"><label>Email * (for Paystack receipt)</label><input type="email" id="email" placeholder="john@gmail.com"></div>
+          <div class="input-group"><label>Street Address *</label><input type="text" id="street" placeholder="12 Allen Ave"></div>
+          <div class="grid2">
+            <div class="input-group"><label>Building / House No *</label><input type="text" id="building" placeholder="Building 5, Flat 2"></div>
+            <div class="input-group"><label>City / LGA *</label><input type="text" id="city" placeholder="Ikeja"></div>
+          </div>
+          <div class="input-group"><label>Landmark (Optional)</label><input type="text" id="landmark" placeholder="Close to Shoprite"></div>
+        </div>
+      </div>
       <div class="row"><span>Subtotal</span><span id="subtotal">₦0</span></div>
-      <div class="row"><span>Shipping</span><span>Calculated at checkout</span></div>
+      <div class="row"><span id="ship-label">Shipping (Lagos)</span><span id="shipping">₦6,800</span></div>
       <div class="row total"><span>Total</span><span id="total">₦0</span></div>
-      <button class="checkout" onclick="checkout()">CHECKOUT</button>
+      <button class="checkout" id="payBtn" onclick="payWithPaystack()">PAY WITH PAYSTACK</button>
       <button class="continue" onclick="location.href='products.html'">CONTINUE SHOPPING</button>
     </div>
   </div>
 </div>
 
 <script>
+const PAYSTACK_PUBLIC_KEY = 'pk_live_2e0ec6d180f2517866c8675dd92e8a726608ec5c'; // <--- PUT YOUR PAYSTACK PUBLIC KEY HERE
+let currentSubtotal=0, deliveryMode='delivery';
+
 function loadCart(){
   let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
   document.getElementById('cart-count').innerText=cart.reduce((s,i)=>s+i.qty,0);
   document.getElementById('item-count').innerText=cart.length+' ITEMS';
   const list=document.getElementById('cart-list');
-  if(cart.length===0){
-    list.innerHTML=`<div class="empty"><h2>Cart Empty</h2><p>You never add anything yet</p><a href="products.html">GO TO SHOP →</a></div>`;
-    document.getElementById('summary-box').style.display='none';
-    return;
+  if(cart.length===0){list.innerHTML=`<div class="empty"><h2 style="font-size:15px">Cart Empty</h2><a href="products.html" style="color:#e10600;text-decoration:none;font-weight:800;font-size:12px">GO TO SHOP →</a></div>`;document.getElementById('summary-box').style.display='none';return;}
+  list.innerHTML='';let sub=0;
+  cart.forEach((item,idx)=>{sub+=item.price*item.qty;list.innerHTML+=`<div class="cart-item"><div class="img-box"><img src="${item.img}"></div><div class="cart-info"><h3>${item.name}</h3><p>SIZE: ${item.size}</p><div class="cart-price">₦${item.price.toLocaleString()}</div><div class="qty-row"><button class="q-btn" onclick="changeQty(${idx},-1)">−</button><div class="q-num">${item.qty}</div><button class="q-btn" onclick="changeQty(${idx},1)">+</button><button class="remove" onclick="removeItem(${idx})">REMOVE</button></div></div></div>`;});
+  currentSubtotal=sub;document.getElementById('subtotal').innerText=`₦${sub.toLocaleString()}`;document.getElementById('summary-box').style.display='block';calcTotal();
+}
+function setDelivery(m){deliveryMode=m;document.getElementById('opt-delivery').classList.toggle('active',m==='delivery');document.getElementById('opt-pickup').classList.toggle('active',m==='pickup');document.getElementById('ship-wrap').classList.toggle('show',m==='delivery');calcTotal();}
+function handleStateChange(){
+  const sel=document.getElementById('state');const box=document.getElementById('otherStateBox');
+  if(sel.selectedIndex>-1 && sel.options[sel.selectedIndex].text.includes('Other States')) box.classList.add('show'); else {box.classList.remove('show');document.getElementById('otherState').value='';}
+  calcTotal();
+}
+function calcTotal(){
+  let ship=0,label='Pickup - FREE';
+  if(deliveryMode==='delivery'){
+    const sel=document.getElementById('state');const other=document.getElementById('otherState').value.trim();
+    ship=sel.value?parseInt(sel.value):6800;
+    if(sel.value){label= sel.options[sel.selectedIndex].text.includes('Other States')? (other||'Other State') : sel.options[sel.selectedIndex].text.split(' - ')[0];} else {label='Lagos'}
   }
-  list.innerHTML='';
-  let sub=0;
-  cart.forEach((item,idx)=>{
-    sub+=item.price*item.qty;
-    list.innerHTML+=`
-    <div class="cart-item">
-      <img src="${item.img}" onerror="this.src='https://via.placeholder.com/200/ffffff/000000?text=CRITZ'">
-      <div class="cart-info">
-        <h3>${item.name}</h3>
-        <p>SIZE: ${item.size}</p>
-        <div class="cart-price">₦${item.price.toLocaleString()}</div>
-        <div class="qty-row">
-          <button class="q-btn" onclick="changeQty(${idx},-1)">−</button>
-          <div class="q-num">${item.qty}</div>
-          <button class="q-btn" onclick="changeQty(${idx},1)">+</button>
-          <button class="remove" onclick="removeItem(${idx})">REMOVE</button>
-        </div>
-      </div>
-    </div>`;
+  window._shipFee=ship;window._shipLabel=label;
+  document.getElementById('ship-label').innerText=`Shipping (${label})`;
+  document.getElementById('shipping').innerText= deliveryMode==='pickup'? 'FREE' : `₦${ship.toLocaleString()}`;
+  document.getElementById('total').innerText=`₦${(currentSubtotal+ship).toLocaleString()}`;
+  window._total=currentSubtotal+ship;
+}
+function changeQty(i,d){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];c[i].qty=Math.max(1,c[i].qty+d);localStorage.setItem('stylevaultCart',JSON.stringify(c));loadCart()}
+function removeItem(i){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];c.splice(i,1);localStorage.setItem('stylevaultCart',JSON.stringify(c));loadCart()}
+
+function payWithPaystack(){
+  let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
+  if(cart.length===0){alert('Cart empty');return}
+  const sel=document.getElementById('state');
+  const email=document.getElementById('email').value.trim();
+  const fn=document.getElementById('fullName').value.trim();
+  const ph=document.getElementById('phone').value.trim();
+  const st=document.getElementById('street').value.trim();
+  const bd=document.getElementById('building').value.trim();
+  const ct=document.getElementById('city').value.trim();
+  const lm=document.getElementById('landmark').value.trim();
+  const other=document.getElementById('otherState').value.trim();
+
+  if(deliveryMode==='delivery'){
+    if(!sel.value){alert('Select delivery region');return}
+    if(sel.options[sel.selectedIndex].text.includes('Other States') &&!other){alert('Enter your state');return}
+    if(!fn||!ph||!email||!st||!bd||!ct){alert('Fill all compulsory fields including Email');return}
+  } else {
+    if(!email){alert('Email required for Paystack receipt');return}
+  }
+  if(!/\S+@\S+\.\S+/.test(email)){alert('Enter valid email');return}
+
+  let shipFee = deliveryMode==='delivery'? window._shipFee : 0;
+  let stateName = deliveryMode==='delivery'? window._shipLabel : 'Lagos Store';
+  let total = window._total;
+
+  let handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: total * 100, // kobo
+    currency: 'NGN',
+    ref: 'CRITZ-'+Date.now(),
+    metadata: {
+      custom_fields: [
+        {display_name: "Customer Name", variable_name: "customer_name", value: fn||'Pickup'},
+        {display_name: "Phone", variable_name: "phone", value: ph},
+        {display_name: "State", variable_name: "state", value: stateName},
+        {display_name: "Address", variable_name: "address", value: `${st}, ${bd}, ${ct}, ${lm}`},
+        {display_name: "Shipping Fee", variable_name: "shipping_fee", value: shipFee},
+        {display_name: "Items", variable_name: "items", value: cart.map(i=>`${i.name} (${i.size}) x${i.qty}`).join(', ')}
+      ]
+    },
+    onClose: function(){ alert('Payment cancelled'); },
+    callback: function(response){
+      // PAYMENT SUCCESS - SAVE TO ADMIN
+      let order={
+        id: response.reference,
+        paystack_ref: response.reference,
+        date: new Date().toLocaleString(),
+        mode: deliveryMode==='delivery'?'DELIVERY':'SELF PICKUP',
+        state: stateName,
+        shipFee: shipFee,
+        subtotal: currentSubtotal,
+        total: total,
+        customer:{fullName:fn||'PICKUP',phone:ph,email:email,street:st,building:bd,city:ct,landmark:lm,otherState:other},
+        items: cart,
+        status: 'PAID',
+        paid_at: new Date().toLocaleString()
+      };
+      let orders=JSON.parse(localStorage.getItem('critzOrders')||'[]');
+      orders.unshift(order);
+      localStorage.setItem('critzOrders',JSON.stringify(orders));
+      localStorage.setItem('lastOrder',JSON.stringify(order));
+      localStorage.removeItem('stylevaultCart');
+      alert(`Payment successful! Ref: ${response.reference}`);
+      window.location.href='order-success.html';
+    }
   });
-  document.getElementById('subtotal').innerText=`₦${sub.toLocaleString()}`;
-  document.getElementById('total').innerText=`₦${sub.toLocaleString()}`;
-  document.getElementById('summary-box').style.display='block';
+  handler.openIframe();
 }
-function changeQty(i,d){
-  let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
-  cart[i].qty=Math.max(1,cart[i].qty+d);
-  localStorage.setItem('stylevaultCart',JSON.stringify(cart));
-  loadCart();
-}
-function removeItem(i){
-  let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
-  cart.splice(i,1);
-  localStorage.setItem('stylevaultCart',JSON.stringify(cart));
-  loadCart();
-}
-function checkout(){
-  alert('Checkout - connect your Paystack/Flutterwave here');
-  // location.href='checkout.html'
-}
-loadCart();
+
+loadCart();setDelivery('delivery');
 </script>
 </body>
 </html>

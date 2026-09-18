@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ORDER SUCCESS - CRITZ</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial}body{background:#000;color:#fff;min-height:100vh;display:grid;place-items:center;padding:16px}
+.box{max-width:420px;width:100%;background:rgba(18,18,18,0.8);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:18px;text-align:center;backdrop-filter:blur(16px)}
+h2{font-size:18px;margin-bottom:6px}.small{font-size:11px;color:#aaa;margin-bottom:14px;line-height:1.5}
+.row{display:flex;justify-content:space-between;font-size:12px;margin:6px 0;color:#ccc}.total{font-weight:900;color:#fff;border-top:1px solid #222;padding-top:10px;margin-top:10px;font-size:15px}
+.btn{width:100%;padding:15px;border-radius:12px;border:none;font-weight:900;font-size:11px;margin-top:10px;min-height:50px}
+.btn-wa{background:#25D366;color:#fff}.btn-shop{background:#fff;color:#000}.btn-home{background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+.items{text-align:left;margin:12px 0;background:rgba(255,255,255,0.05);padding:10px;border-radius:10px}
+.items div{font-size:11px;margin:3px 0;color:#bbb}
+</style></head>
+<body>
+<div class="box">
+  <h2>✅ ORDER PLACED!</h2>
+  <div class="small" id="orderId">Your order has been saved. We will contact you soon for delivery (1-2 weeks).</div>
+  <div class="items" id="items"></div>
+  <div class="row"><span>Subtotal</span><span id="sub"></span></div>
+  <div class="row"><span>Shipping</span><span id="ship"></span></div>
+  <div class="row total"><span>Total</span><span id="tot"></span></div>
+
+  <button class="btn btn-wa" onclick="sendWhatsApp()">SEND ORDER TO WHATSAPP (Optional)</button>
+  <button class="btn btn-shop" onclick="location.href='products.html'">CONTINUE SHOPPING</button>
+  <button class="btn btn-home" onclick="location.href='index.html'">GO HOME</button>
+</div>
+<script>
+let o=JSON.parse(localStorage.getItem('lastOrder')||'null');
+if(!o){document.body.innerHTML='<p>No order found</p>'}
+else{
+ document.getElementById('orderId').innerHTML=`<b>${o.id}</b><br>${o.date}<br>${o.mode} - ${o.state}`;
+ document.getElementById('sub').innerText='₦'+o.subtotal.toLocaleString();
+ document.getElementById('ship').innerText=o.shipFee===0?'FREE':'₦'+o.shipFee.toLocaleString();
+ document.getElementById('tot').innerText='₦'+o.total.toLocaleString();
+ document.getElementById('items').innerHTML=o.items.map(i=>`<div>• ${i.name} | Size ${i.size} x${i.qty} = ₦${(i.price*i.qty).toLocaleString()}</div>`).join('');
+}
+function sendWhatsApp(){
+  let yourNumber='2348012345678'; // <-- PUT YOUR WHATSAPP NUMBER HERE
+  let itemsText=o.items.map(i=>`• ${i.name} (Size: ${i.size}) x${i.qty} - ₦${(i.price*i.qty).toLocaleString()}`).join('%0A');
+  let msg=`*NEW CRITZ ORDER*%0A%0AID: ${o.id}%0A${o.date}%0A%0A*${o.mode} - ${o.state}*%0A%0A*Customer:*%0AName: ${o.customer.fullName}%0APhone: ${o.customer.phone}%0AStreet: ${o.customer.street}%0ABuilding: ${o.customer.building}%0ACity: ${o.customer.city}%0ALandmark: ${o.customer.landmark||'None'}%0A%0A*Items:*%0A${itemsText}%0A%0ATotal: ₦${o.total.toLocaleString()}`;
+  window.open(`https://wa.me/${yourNumber}?text=${msg}`,'_blank');
+}
+</script>
+</body></html>
