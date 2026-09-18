@@ -129,19 +129,19 @@ header{
 <section class="products">
   <div class="product-card">
     <div class="img-wrap"><img src="polo.png" onerror="this.src='https://via.placeholder.com/600x600/111111/ffffff?text=CRITZ'"></div>
-    <h3>CRITZ POLO</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button>
+    <h3>CRITZ POLO WHITE AND BLACK</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo')">VIEW</button>
   </div>
   <div class="product-card">
-    <div class="img-wrap"><img src="sleeve2.png"></div>
-    <h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button>
+    <div class="img-wrap"><img src="polo2.png"></div>
+    <h3>CRITZ POLO PINK AND WHITE</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo2')">VIEW</button>
   </div>
   <div class="product-card">
-    <div class="img-wrap"><img src="jorts.png"></div>
-    <h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button>
+    <div class="img-wrap"><img src="sleeve.png"></div>
+    <h3>LIFESTYLE SLEEVE</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve')">VIEW</button>
   </div>
   <div class="product-card">
     <div class="img-wrap"><img src="jorts2.png"></div>
-    <h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('longsleeve')">VIEW</button>
+    <h3>LONG SLEEVE TEE</h3><div class="price">₦35,000</div><button class="view-btn" onclick="openDrawer('sleeve')">VIEW</button>
   </div>
   <div class="product-card">
     <div class="img-wrap"><img src="tees.png"></div>
@@ -173,9 +173,9 @@ header{
 
 <script>
 const products={
-  longsleeve:{title:"CRITZ POLO",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg"],sizes:["M","L","XL","XXL","FEMALE COPPED"]},
-  hoodie:{title:"CRITZ HOODIE",price:40000,images:["hoodie.png","hoodie-back.png"],sizes:["M","L","XL","XXL"]},
-  sleeveless:{title:"GRAPHIC SLEEVELESS TEE",price:25000,images:["harmlesstee.png","harmlesstee-back.png"],sizes:["M","L","XL"]}
+  polo:{title:"CRITZ POLO",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg"],sizes:["M","L","XL","XXL","FEMALE COPPED"]},
+  polo2:{title:"CRITZ POLO",price:37000,images:["polo2.png","polopic2.jpeg","polopic3.jpeg"],sizes:["M","L","XL","XXL","FEMALE COPPED"]},
+  sleeve:{title:"LIFESTYLE SLEEVE",price:25000,images:["sleeve.png","swag.jpeg"],sizes:["M","L","XL"]}
 };
 let currentProduct=null,selectedSize=null,qty=1;
 function updateNavCart(){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];document.getElementById('nav-cart').innerText=c.reduce((s,i)=>s+i.qty,0)}
