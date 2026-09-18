@@ -6,87 +6,73 @@
 <title>SHOP - CRITZ</title>
 <style>
 :root{--red:#e10600}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial;-webkit-tap-highlight-color:transparent}
-html,body{overflow-x:hidden}
-body{background:#000 url('https://i.pinimg.com/1200x/c6/f5/71/c6f571c6e70de06b3485e3fb833f615d.jpg') no-repeat center center fixed;background-size:cover;color:#fff}
-body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.68);z-index:-1}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;-webkit-tap-highlight-color:transparent}
+body{background:#000 url('https://i.pinimg.com/1200x/c6/f5/71/c6f571c6e70de06b3485e3fb833f615d.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:-1}
 body.no-scroll{overflow:hidden}
-header{position:fixed;top:0;width:100%;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;z-index:20;background:rgba(0,0,0,0.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,0.12)}
+header{position:fixed;top:0;width:100%;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;z-index:20;background:rgba(0,0,0,0.9);border-bottom:1px solid rgba(255,255,255,0.12)}
 .logo{font-size:18px;font-weight:900;letter-spacing:1px}.logo span{color:var(--red)}
-.nav{display:flex;gap:12px;align-items:center}
-.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:10px;font-weight:800;letter-spacing:0.5px;padding:6px 4px}
-.nav a.active{color:#fff;border-bottom:1px solid var(--red)}
-.cart-badge{background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:10px;margin-left:3px;font-weight:900}
-.products{padding:70px 10px 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:1400px;margin:0 auto;position:relative;z-index:1}
-.product-card{background:rgba(15,15,15,0.50);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.15);border-radius:14px;overflow:hidden;text-align:center;display:flex;flex-direction:column;box-shadow:0 8px 32px rgba(0,0,0,0.5)}
-.img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:#111;position:relative}
-.img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform 0.4s ease}
-.product-card h3{font-size:9px;margin:10px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:0.5px;font-weight:800}
-.price{color:var(--red);font-size:13px;font-weight:900;margin-bottom:8px}
-.view-btn{width:calc(100% - 12px);background:rgba(225,6,0,0.92);backdrop-filter:blur(10px);color:#fff;border:1px solid rgba(255,255,255,0.15);padding:11px;border-radius:8px;font-size:10px;font-weight:900;margin:0 6px 8px;min-height:38px}
-@media(min-width:768px){.products{gap:14px;padding:80px 16px 30px}.img-wrap{aspect-ratio:4/5}}
-@media(min-width:1024px){.products{grid-template-columns:repeat(3,1fr);gap:18px;padding:90px 30px;max-width:1000px}.nav{gap:20px}.nav a{font-size:11px}.logo{font-size:20px}}
-@media(max-width:360px){.products{gap:8px;padding:68px 8px 20px}header{padding:10px 10px}.nav{gap:8px}.nav a{font-size:9px}}
+.nav{display:flex;gap:18px;align-items:center}
+.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:11px;font-weight:800}
+.nav a.active{color:#fff;border-bottom:2px solid var(--red);padding-bottom:2px}
+.cart-badge{background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:50%;margin-left:3px;font-weight:900}
+.products{padding:80px 20px 30px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto}
+.product-card{background:rgba(18,18,18,0.9);border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column;transform:scale(0.945);transform-origin:top center;width:100%}
 
-/* DRAWER */
-.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:999;opacity:0;visibility:hidden;transition:0.3s}
+/* FIXED TO FIT VERY WELL */
+.img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:#0f0f0f;position:relative}
+.img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+
+.product-card h3{font-size:9px;margin:10px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;text-transform:uppercase}
+.price{color:var(--red);font-size:12px;font-weight:900;margin-bottom:8px}
+.view-btn{width:calc(100% - 14px);background:var(--red);color:#fff;border:none;padding:11px;border-radius:7px;font-size:9.5px;font-weight:900;margin:0 7px 9px;letter-spacing:1px}
+@media(max-width:768px){.products{grid-template-columns:repeat(2,1fr);gap:10px;padding:70px 8px 20px}.product-card{transform:scale(0.966)}.img-wrap{aspect-ratio:4/5}}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:999;opacity:0;visibility:hidden;transition:0.3s}
 .drawer-overlay.active{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:-100%;width:86%;max-width:340px;height:100%;background:rgba(10,10,10,0.82);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-left:1px solid rgba(255,255,255,0.15);z-index:1000;transition:right 0.38s cubic-bezier(0.32,0.72,0,1);display:flex;flex-direction:column}
+.drawer{position:fixed;top:0;right:-100%;width:86%;max-width:360px;height:100%;background:#0a0a0a;border-left:1px solid rgba(255,255,255,0.15);z-index:1000;transition:right 0.35s ease;display:flex;flex-direction:column}
 .drawer.active{right:0}
 .drawer-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.1)}
-.drawer-top h3{font-size:11px;letter-spacing:2.5px;color:rgba(255,255,255,0.6);font-weight:800}
-.close-x{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:20px;display:grid;place-items:center}
-.drawer-img-wrap{background:transparent;width:100%;height:32vh;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:12px 14px}
+.drawer-top h3{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.6)}
+.close-x{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:18px;display:grid;place-items:center}
+.drawer-img-wrap{width:100%;height:32vh;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:12px}
 .drawer-img-wrap::-webkit-scrollbar{display:none}
-.drawer-img-wrap img{width:72%;min-width:72%;height:100%;object-fit:cover;border-radius:14px;scroll-snap-align:center;border:1px solid rgba(255,255,255,0.2);background:#111}
+.drawer-img-wrap img{width:75%;min-width:75%;height:100%;object-fit:cover;border-radius:12px;scroll-snap-align:center;background:#111;border:1px solid rgba(255,255,255,0.15)}
 .dots-wrap{display:flex;gap:5px;justify-content:center;padding:8px 0}
-.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25);transition:0.2s}
-.dot.active{background:#fff;width:16px}
-.drawer-content{padding:14px 16px;flex:1;overflow-y:auto;padding-bottom:100px}
-.drawer-content h2{font-size:16px;font-weight:900;margin-bottom:4px}
-.d-price{color:var(--red);font-size:16px;font-weight:900;margin-bottom:14px}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25)}.dot.active{background:#fff;width:16px}
+.drawer-content{padding:14px 16px;flex:1;overflow-y:auto;padding-bottom:110px}
+.drawer-content h2{font-size:14px;font-weight:900;margin-bottom:4px}
+.d-price{color:var(--red);font-size:15px;font-weight:900;margin-bottom:14px}
 .opt-title{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:700}
-.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
-.size-btn{padding:10px 14px;min-width:46px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.07);color:#fff;border-radius:8px;font-weight:800;font-size:12px}
-.size-btn.active{background:rgba(255,255,255,0.9);color:#000;border-color:#fff}
-.qty-box{display:flex;align-items:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;width:150px;overflow:hidden;margin-bottom:18px}
-.qty-btn{width:48px;height:42px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:18px}
-.qty-num{flex:1;text-align:center;font-weight:900;font-size:14px}
-.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:rgba(0,0,0,0.6);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:8px}
-.btn-big{width:100%;padding:14px;border:none;border-radius:10px;font-weight:900;font-size:11px;border:1px solid rgba(255,255,255,0.15);min-height:46px}
-.btn-cart{background:rgba(255,255,255,0.9);color:#000}
-.btn-buy{background:rgba(225,6,0,0.9);color:#fff}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.size-btn{padding:10px 14px;min-width:44px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.07);color:#fff;border-radius:8px;font-weight:800;font-size:12px}
+.size-btn.active{background:#fff;color:#000}
+.female-btn-under{width:100%;padding:12px;background:transparent;border:1px solid #fff;color:#fff;border-radius:10px;font-size:10px;font-weight:900;letter-spacing:1.2px;margin-bottom:16px;display:none;transition:0.2s}
+.female-btn-under.show{display:block}
+.female-btn-under.selected{background:#fff;color:#000;border-color:#fff}
+.qty-box{display:flex;align-items:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;width:140px;overflow:hidden;margin-bottom:18px}
+.qty-btn{width:44px;height:40px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:18px}
+.qty-num{flex:1;text-align:center;font-weight:900}
+.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:#000;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:8px}
+.btn-big{width:100%;padding:13px;border:none;border-radius:10px;font-weight:900;font-size:11px}
+.btn-cart{background:#fff;color:#000}.btn-buy{background:var(--red);color:#fff}
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo">CRI<span>TZ</span></div>
-  <div class="nav">
-    <a href="index.html">HOME</a>
-    <a href="products.html" class="active">SHOP</a>
-    <a href="cart.html">CART <span class="cart-badge" id="nav-cart">0</span></a>
-  </div>
+  <div class="nav"><a href="index.html">HOME</a><a href="products.html" class="active">SHOP</a><a href="cart.html">CART <span class="cart-badge" id="nav-cart">0</span></a></div>
 </header>
-
 <section class="products">
-  <!-- EXISTING -->
-  <div class="product-card"><div class="img-wrap"><img src="polo.png" onerror="this.src='https://via.placeholder.com/600x600/111/fff?text=CRITZ'"></div><h3>CRITZ POLO WHITE AND BLACK</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="polo.png"></div><h3>CRITZ POLO WHITE AND BLACK</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo')">VIEW</button></div>
   <div class="product-card"><div class="img-wrap"><img src="polo2.png"></div><h3>CRITZ POLO PINK AND WHITE</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo2')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="sleeve.png"></div><h3>LIFESTYLE SLEEVE</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="sleeve2.png"></div><h3>LIFESTYLE SLEEVE 2</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve2')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="tees.png"></div><h3>CRITZ HOODIE</h3><div class="price">₦40,000</div><button class="view-btn" onclick="openDrawer('hoodie')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="tees2.png"></div><h3>SLEEVELESS</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeveless')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="sleeve.png"></div><h3>LIFESTYLE SLEEVE BLACK</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="sleeve2.png"></div><h3>LIFESTYLE SLEEVE WHITE</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve2')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="tees.png"></div><h3>CRITZ KILLER TEE</h3><div class="price">₦15,000</div><button class="view-btn" onclick="openDrawer('killer')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="tees2.png"></div><h3>CRITZ KILLER TEE</h3><div class="price">₦15,000</div><button class="view-btn" onclick="openDrawer('killer2')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="joggers.png"></div><h3>CRITZ JOGGERS</h3><div class="price">₦30,000</div><button class="view-btn" onclick="openDrawer('joggers')">VIEW</button></div>
+  <div class="product-card"><div class="img-wrap"><img src="joggers2.png"></div><h3>CRITZ JOGGERS</h3><div class="price">₦30,000</div><button class="view-btn" onclick="openDrawer('joggers2')">VIEW</button></div>
 
-  <!-- NEW PRODUCTS - ADD MORE HERE -->
-  <div class="product-card"><div class="img-wrap"><img src="tee3.png"></div><h3>CRITZ ESSENTIAL TEE BLACK</h3><div class="price">₦22,000</div><button class="view-btn" onclick="openDrawer('tee3')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="cargo.png"></div><h3>CRITZ CARGO PANTS</h3><div class="price">₦45,000</div><button class="view-btn" onclick="openDrawer('cargo')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="cap.png"></div><h3>CRITZ SNAPBACK CAP</h3><div class="price">₦15,000</div><button class="view-btn" onclick="openDrawer('cap')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="jersey.png"></div><h3>CRITZ JERSEY</h3><div class="price">₦30,000</div><button class="view-btn" onclick="openDrawer('jersey')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="shorts.png"></div><h3>CRITZ SHORTS</h3><div class="price">₦28,000</div><button class="view-btn" onclick="openDrawer('shorts')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="tracksuit.png"></div><h3>CRITZ TRACKSUIT</h3><div class="price">₦65,000</div><button class="view-btn" onclick="openDrawer('tracksuit')">VIEW</button></div>
 </section>
-
 <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-top"><h3>SELECT OPTIONS</h3><button class="close-x" onclick="closeDrawer()">✕</button></div>
@@ -97,6 +83,7 @@ header{position:fixed;top:0;width:100%;padding:12px 14px;display:flex;justify-co
     <div class="d-price" id="drawer-price"></div>
     <div class="opt-title" id="size-label">SIZE: M</div>
     <div class="sizes" id="size-options"></div>
+    <button class="female-btn-under" id="femaleBtn" onclick="toggleFemale()">FEMALE CROPPED POLO</button>
     <div class="qty-box"><button class="qty-btn" onclick="changeQty(-1)">−</button><div class="qty-num" id="qty">1</div><button class="qty-btn" onclick="changeQty(1)">+</button></div>
   </div>
   <div class="btn-stack">
@@ -104,46 +91,67 @@ header{position:fixed;top:0;width:100%;padding:12px 14px;display:flex;justify-co
     <button class="btn-big btn-buy" onclick="buyNow()">BUY IT NOW</button>
   </div>
 </div>
-
 <script>
 const products={
-  polo:{title:"CRITZ POLO WHITE AND BLACK",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg","polo-back.png","polo-detail.png"],sizes:["M","L","XL","XXL","FEMALE COPPED"]},
-  polo2:{title:"CRITZ POLO PINK AND WHITE",price:37000,images:["polo2.png","polopic2.jpeg","polopic3.jpeg","polo2-back.png","polo2-detail.png"],sizes:["M","L","XL","XXL","FEMALE COPPED"]},
-  sleeve:{title:"LIFESTYLE SLEEVE",price:25000,images:["sleeve.png","swag.jpeg","sleeve-back.png","sleeve-detail.png"],sizes:["M","L","XL"]},
-  sleeve2:{title:"LIFESTYLE SLEEVE 2",price:25000,images:["sleeve2.png","sleeve2-back.png","sleeve2-detail.png","swag2.jpeg"],sizes:["M","L","XL","XXL"]},
-  hoodie:{title:"CRITZ HOODIE",price:40000,images:["tees.png","hoodie-back.png","hoodie-detail.png","hoodie-fit.png"],sizes:["M","L","XL","XXL"]},
-  sleeveless:{title:"SLEEVELESS",price:25000,images:["tees2.png","sleeveless-back.png","sleeveless-detail.png"],sizes:["M","L","XL"]},
-
-  // NEW PRODUCTS - WITH MORE SLIDES
-  tee3:{title:"CRITZ ESSENTIAL TEE BLACK",price:22000,images:["tee3.png","tee3-back.png","tee3-detail.png","tee3-fit.png"],sizes:["S","M","L","XL","XXL"]},
-  cargo:{title:"CRITZ CARGO PANTS",price:45000,images:["cargo.png","cargo-back.png","cargo-detail.png","cargo-fit.png","cargo-side.png"],sizes:["30","32","34","36","38"]},
-  cap:{title:"CRITZ SNAPBACK CAP",price:15000,images:["cap.png","cap-back.png","cap-side.png","cap-fit.png"],sizes:["ONE SIZE"]},
-  jersey:{title:"CRITZ JERSEY",price:30000,images:["jersey.png","jersey-back.png","jersey-detail.png","jersey-fit.png"],sizes:["M","L","XL","XXL"]},
-  shorts:{title:"CRITZ SHORTS",price:28000,images:["shorts.png","shorts-back.png","shorts-detail.png"],sizes:["M","L","XL"]},
-  tracksuit:{title:"CRITZ TRACKSUIT",price:65000,images:["tracksuit.png","tracksuit-back.png","tracksuit-detail.png","tracksuit-fit.png","tracksuit-top.png"],sizes:["M","L","XL","XXL"]}
+  polo:{title:"CRITZ POLO WHITE AND BLACK",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg"],sizes:["M","L","XL","XXL"], female:true, femaleTitle:"CRITZ POLO WHITE - FEMALE CROPPED POLO", femaleImg:"femalecop.jpeg"},
+  polo2:{title:"CRITZ POLO PINK AND WHITE",price:37000,images:["polo2.png","polopic2.jpeg","polopic3.jpeg"],sizes:["M","L","XL","XXL"], female:true, femaleTitle:"CRITZ POLO PINK - FEMALE CROPPED POLO", femaleImg:"polopic3.jpeg"},
+  sleeve:{title:"LIFESTYLE SLEEVE BLACK",price:25000,images:["sleeve.png","swag.jpeg"],sizes:["M","L","XL"]},
+  sleeve2:{title:"LIFESTYLE SLEEVE WHITE",price:25000,images:["sleeve2.png","lifestyle.jpeg"],sizes:["M","L","XL","XXL"]},
+  killer:{title:"KILLER TEE",price:15000,images:["tees.png","crop.jpeg"],sizes:["M","L","XL","XXL"]},
+  killer2:{title:"KILLER TEE",price:15000,images:["tees2.png","crop2.jpeg"],sizes:["M","L","XL"]},
+  joggers:{title:"CRITZ JOGGERS",price:30000,images:["joggers.png","joggers2.jpeg"],sizes:["M","L","XL"]},
+  joggers2:{title:"CRITZ JOGGERS",price:30000,images:["joggers2.png","joggers3.jpeg"],sizes:["M","L","XL"]},
 };
-
-let currentProduct=null,selectedSize=null,qty=1;
+let currentProduct=null, originalProduct=null, selectedSize=null, qty=1, femaleSelected=false;
 function updateNavCart(){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];document.getElementById('nav-cart').innerText=c.reduce((s,i)=>s+i.qty,0)}
 function openDrawer(id){
- currentProduct=products[id];selectedSize=currentProduct.sizes[0];qty=1;
+ originalProduct=JSON.parse(JSON.stringify(products[id]));
+ currentProduct=products[id];
+ selectedSize=currentProduct.sizes[0];qty=1;femaleSelected=false;
  document.getElementById('drawer-title').innerText=currentProduct.title;
  document.getElementById('drawer-price').innerText=`₦${currentProduct.price.toLocaleString()}.00`;
  document.getElementById('qty').innerText=qty;
+ renderImages(currentProduct.images);
+ renderSizes();
+ document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`;
+ let fBtn=document.getElementById('femaleBtn');
+ if(currentProduct.female){fBtn.classList.add('show'); fBtn.classList.remove('selected'); fBtn.innerText="FEMALE CROPPED POLO";} else {fBtn.classList.remove('show')}
+ document.body.classList.add('no-scroll');document.getElementById('overlay').classList.add('active');document.getElementById('drawer').classList.add('active');
+}
+function renderImages(imgs){
  const imgDiv=document.getElementById('drawer-images');imgDiv.innerHTML='';
- currentProduct.images.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" onerror="this.src='https://via.placeholder.com/600x600/111/fff?text=CRITZ'" loading="lazy">`;});
+ imgs.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" onerror="this.src='https://via.placeholder.com/600x600/111/fff?text=CRITZ'">`;});
  const dotsDiv=document.getElementById('dots');dotsDiv.innerHTML='';
- currentProduct.images.forEach((_,k)=>{dotsDiv.innerHTML+=`<div class="dot ${k===0?'active':''}"></div>`;});
- imgDiv.onscroll=()=>{let i=Math.round(imgDiv.scrollLeft/(imgDiv.clientWidth*0.72+10));document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));};
+ imgs.forEach((_,k)=>{dotsDiv.innerHTML+=`<div class="dot ${k===0?'active':''}"></div>`;});
+ imgDiv.onscroll=()=>{let i=Math.round(imgDiv.scrollLeft/(imgDiv.clientWidth*0.75+10));document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));};
+}
+function renderSizes(){
  const sizeDiv=document.getElementById('size-options');sizeDiv.innerHTML='';
  currentProduct.sizes.forEach((s,i)=>{sizeDiv.innerHTML+=`<button class="size-btn ${i===0?'active':''}" onclick="selectSize('${s}',this)">${s}</button>`;});
- document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`;
- document.body.classList.add('no-scroll');document.getElementById('overlay').classList.add('active');document.getElementById('drawer').classList.add('active');
+}
+function toggleFemale(){
+  let fBtn=document.getElementById('femaleBtn');
+  if(!femaleSelected){
+    femaleSelected=true;
+    fBtn.classList.add('selected');
+    fBtn.innerText="FEMALE CROPPED - SELECTED ✓ (TAP TO REMOVE)";
+    document.getElementById('drawer-title').innerText=originalProduct.femaleTitle;
+    renderImages([originalProduct.femaleImg]);
+    currentProduct={...originalProduct, title:originalProduct.femaleTitle, images:[originalProduct.femaleImg]};
+  } else {
+    femaleSelected=false;
+    fBtn.classList.remove('selected');
+    fBtn.innerText="FEMALE CROPPED POLO";
+    document.getElementById('drawer-title').innerText=originalProduct.title;
+    renderImages(originalProduct.images);
+    currentProduct={...originalProduct};
+    renderSizes();
+  }
 }
 function closeDrawer(){document.body.classList.remove('no-scroll');document.getElementById('overlay').classList.remove('active');document.getElementById('drawer').classList.remove('active')}
 function selectSize(s,el){selectedSize=s;document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`}
 function changeQty(v){qty=Math.max(1,qty+v);document.getElementById('qty').innerText=qty}
-function addToCartFromDrawer(){let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];let key=currentProduct.title+'-'+selectedSize;let ex=cart.find(i=>i.key===key);if(ex)ex.qty+=qty;else cart.push({key,name:currentProduct.title,size:selectedSize,price:currentProduct.price,img:currentProduct.images[0],qty});localStorage.setItem('stylevaultCart',JSON.stringify(cart));updateNavCart();closeDrawer()}
+function addToCartFromDrawer(){let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];let key=document.getElementById('drawer-title').innerText+'-'+selectedSize;let ex=cart.find(i=>i.key===key);if(ex)ex.qty+=qty;else cart.push({key,name:document.getElementById('drawer-title').innerText,size:selectedSize,price:currentProduct.price,img:currentProduct.images[0],qty});localStorage.setItem('stylevaultCart',JSON.stringify(cart));updateNavCart();closeDrawer()}
 function buyNow(){addToCartFromDrawer();setTimeout(()=>location.href='cart.html',200)}
 updateNavCart();
 </script>
