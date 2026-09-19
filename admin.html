@@ -1,130 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ADMIN - CRITZ</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial}
-body{background:#0a0a0a;color:#fff;min-height:100vh}
-#lockScreen{position:fixed;inset:0;background:#000 url('background.jpg') no-repeat center center fixed;background-size:cover;display:grid;place-items:center;z-index:9999}
-#lockScreen::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:-1}
-.lockBox{background:rgba(18,18,18,0.85);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:22px;width:90%;max-width:340px;text-align:center}
-.lockBox h2{font-size:16px;margin-bottom:6px;letter-spacing:2px}.lockBox h2 span{color:#e10600}
-.lockBox p{font-size:11px;color:#777;margin-bottom:16px}
-.lockBox input{width:100%;padding:14px;background:#000;border:1px solid #333;border-radius:10px;color:#fff;font-size:15px;outline:none;margin-bottom:12px;text-align:center;letter-spacing:2px}
-.lockBox button{width:100%;padding:14px;background:#e10600;border:none;border-radius:10px;color:#fff;font-weight:900;font-size:11px;letter-spacing:1px}
-.error{color:#ff4444;font-size:11px;margin-top:8px;display:none}
-
-#adminContent{display:none;padding:12px;max-width:800px;margin:0 auto}
-h1{font-size:18px;margin-bottom:4px}h1 span{color:#e10600}
-.sub{font-size:10px;color:#666;margin-bottom:12px}
-.topbar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.btn{padding:10px 12px;border-radius:10px;border:1px solid #333;background:#111;color:#fff;font-weight:800;font-size:10px;min-height:38px}
-.btn-wa{background:#25D366;border-color:#25D366;color:#fff}
-.btn-del{background:#e10600;border-color:#e10600}
-.search{width:100%;padding:12px;background:#111;border:1px solid #222;border-radius:10px;color:#fff;font-size:13px;margin-bottom:12px;outline:none}
-.order{background:#111;border:1px solid #222;border-radius:16px;padding:12px;margin-bottom:12px}
-.badge{padding:4px 8px;border-radius:20px;font-size:9px;font-weight:900;display:inline-block;margin-right:4px}
-.badge-paid{background:#00c853;color:#000}.badge-delivery{background:#25D366;color:#000}.badge-pickup{background:#fff;color:#000}.badge-unpaid{background:#ffab00;color:#000}
-.id{color:#e10600;font-weight:900;font-size:12px}.date{font-size:10px;color:#555;margin:4px 0}.ref{font-size:10px;color:#666;word-break:break-all}
-.cust{background:#181818;padding:10px;border-radius:10px;margin:8px 0;font-size:12px;line-height:1.7}
-.item{font-size:11px;color:#aaa;margin:3px 0;display:flex;justify-content:space-between}
-.total{font-weight:900;margin-top:8px;border-top:1px solid #222;padding-top:8px;display:flex;justify-content:space-between;font-size:13px}
-.total span:last-child{color:#e10600}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0a0a0a;color:#fff;padding:16px;max-width:600px;margin:0 auto}
+h1{font-size:18px;font-weight:900;margin-bottom:6px}h1 span{color:#e10600}
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow:auto;position:sticky;top:0;background:#0a0a0a;padding:8px 0;z-index:10}
+.tab{padding:10px 16px;border-radius:20px;border:1px solid #333;background:#111;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}.tab.active{background:#fff;color:#000}
+.card{background:#111;border:1px solid #222;border-radius:14px;padding:12px;margin-bottom:10px}
+.card-top{display:flex;gap:10px}.card-top img{width:64px;height:64px;object-fit:cover;border-radius:8px;background:#000}
+.card input{width:100%;padding:11px;background:#000;border:1px solid #333;border-radius:8px;color:#fff;margin-top:6px;font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.label{font-size:9px;color:#888;margin-top:8px;display:block;letter-spacing:1px;font-weight:800}
+.btns{display:flex;gap:8px;margin-top:10px}.btn-save{flex:1;padding:12px;background:#fff;color:#000;border:none;border-radius:10px;font-weight:900;font-size:11px;cursor:pointer}.btn-del{padding:12px;background:rgba(255,0,0,0.15);border:1px solid rgba(255,0,0,0.3);color:#ff6b6b;border-radius:10px;font-size:11px;font-weight:800}.btn-add{width:100%;padding:14px;background:#e10600;border:none;border-radius:12px;color:#fff;font-weight:900;margin-bottom:14px;cursor:pointer}
+.status{font-size:11px;text-align:center;padding:10px;background:#111;border-radius:8px;margin-bottom:12px;border:1px solid #222}
 </style>
 </head>
 <body>
-
-<div id="lockScreen">
-  <div class="lockBox">
-    <h2>CRI<span>TZ</span> ADMIN</h2>
-    <p>Enter password to view orders</p>
-    <input type="password" id="passInput" placeholder="PASSWORD" onkeypress="if(event.key==='Enter')checkPass()">
-    <button onclick="checkPass()">UNLOCK</button>
-    <div class="error" id="error">Wrong password!</div>
-    <p style="margin-top:12px;font-size:9px;color:#444">Default: CRITZ2024 - change in code</p>
-  </div>
+<h1>CRI<span>TZ</span> CLOUD ADMIN</h1>
+<div id="status" class="status">Connecting to cloud...</div>
+<div class="tabs">
+  <div class="tab active" id="t1" onclick="showTab('products')">PRODUCTS</div>
+  <div class="tab" id="t2" onclick="showTab('orders')">ORDERS</div>
 </div>
-
-<div id="adminContent">
-  <h1>CRI<span>TZ</span> ADMIN</h1>
-  <div class="sub">Total <span id="count">0</span> orders | Paid: <span id="paidCount">0</span> | Revenue: ₦<span id="revenue">0</span> | <a href="#" onclick="logout()" style="color:#e10600;text-decoration:none">LOGOUT</a></div>
-  <div class="topbar">
-    <button class="btn" onclick="location.reload()">REFRESH</button>
-    <button class="btn" onclick="exportCSV()">EXPORT CSV</button>
-    <button class="btn btn-del" onclick="if(confirm('Delete ALL?')){localStorage.removeItem('critzOrders');location.reload()}">CLEAR ALL</button>
-  </div>
-  <input type="text" id="search" class="search" placeholder="Search name, phone, state, ID..." oninput="render()">
-  <div id="list"></div>
+<div id="tab-products">
+  <button class="btn-add" onclick="addNew()">+ ADD NEW PRODUCT</button>
+  <div id="productList">Loading...</div>
 </div>
+<div id="tab-orders" style="display:none"><div id="orderList"></div></div>
 
-<script>
-// ===== CHANGE YOUR PASSWORD HERE =====
-const ADMIN_PASSWORD = 'CRITZ2024';
-// =====================================
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-function checkPass(){
-  let p=document.getElementById('passInput').value;
-  if(p===ADMIN_PASSWORD){
-    localStorage.setItem('critzAdminAuth','true');
-    document.getElementById('lockScreen').style.display='none';
-    document.getElementById('adminContent').style.display='block';
-    render();
+const firebaseConfig = {
+  apiKey: "AIzaSyBFvtqQOELgZyVxvmVqUJz0Lcx62PsEso",
+  authDomain: "critz-aa676.firebaseapp.com",
+  databaseURL: "https://critz-aa676-default-rtdb.firebaseio.com",
+  projectId: "critz-aa676",
+  storageBucket: "critz-aa676.firebasestorage.app",
+  messagingSenderId: "350216428006",
+  appId: "1:350216428006:web:3a14f08c330cb819629e27"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+const DEFAULT_PRODUCTS = {
+  polo:{title:"CRITZ POLO WHITE AND BLACK",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg"],sizes:["M","L","XL","XXL"], stock:{M:3,L:7,XL:4,XXL:2}, female:true, femaleTitle:"CRITZ POLO WHITE - FEMALE CROPPED POLO", femaleImg:"femalecop.jpeg"},
+  polo2:{title:"CRITZ POLO PINK AND WHITE",price:37000,images:["polo2.png","femaleswag.jpeg","polopic3.jpeg"],sizes:["M","L","XL","XXL"], stock:{M:2,L:5,XL:3,XXL:2}, female:true, femaleTitle:"CRITZ POLO PINK - FEMALE CROPPED POLO", femaleImg:"femaleswag.jpeg"},
+  sleeve:{title:"LIFESTYLE SLEEVE BLACK",price:25000,images:["sleeve.png","maleswag.jpeg"],sizes:["M","L","XL"], stock:{M:6,L:4,XL:2}},
+  sleeve2:{title:"LIFESTYLE SLEEVE WHITE",price:25000,images:["sleeve2.png","lifestyle.jpeg"],sizes:["M","L","XL","XXL"], stock:{M:3,L:3,XL:5,XXL:4}},
+  killer:{title:"CROPED KILLER TEE",price:15000,images:["tees.png","crop.jpeg"],sizes:["M","L","XL","XXL"], stock:{M:2,L:2,XL:6,XXL:3}},
+  killer2:{title:"CROPED KILLER TEE",price:15000,images:["tees2.png","crop2.jpeg"],sizes:["M","L","XL"], stock:{M:5,L:3,XL:2}},
+  joggers:{title:"CRITZ JOGGERS",price:30000,images:["joggers.png","joggers2.jpeg"],sizes:["M","L","XL"], stock:{M:3,L:4,XL:2}},
+  joggers2:{title:"CRITZ JOGGERS",price:30000,images:["joggers2.png","joggers3.jpeg"],sizes:["M","L","XL"], stock:{M:4,L:2,XL:3}},
+  drip:{title:"CRITZ PRAYER TEE",price:15000,images:["driplord.png","drip001.jpeg"],sizes:["M","L","XL","XXL"], stock:{M:2,L:7,XL:5,XXL:3}},
+};
+
+let products = {};
+function showTab(t){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.getElementById(t==='products'?'t1':'t2').classList.add('active');
+  document.getElementById('tab-products').style.display = t==='products'?'block':'none';
+  document.getElementById('tab-orders').style.display = t==='orders'?'block':'none';
+}
+window.showTab = showTab;
+
+async function init(){
+  const snap = await get(ref(db, 'products'));
+  if(!snap.exists()){
+    await set(ref(db, 'products'), DEFAULT_PRODUCTS);
+    products = DEFAULT_PRODUCTS;
+    document.getElementById('status').innerText = 'Default products created in cloud ✓';
   } else {
-    document.getElementById('error').style.display='block';
-    document.getElementById('passInput').value='';
+    products = snap.val();
+    document.getElementById('status').innerText = 'Connected to cloud ✓ - Changes affect all customers';
   }
+  renderProducts(); loadOrders();
 }
-function logout(){localStorage.removeItem('critzAdminAuth');location.reload()}
-// Auto login if already unlocked
-if(localStorage.getItem('critzAdminAuth')==='true'){
-  document.getElementById('lockScreen').style.display='none';
-  document.getElementById('adminContent').style.display='block';
+init();
+
+onValue(ref(db, 'products'), (snap)=>{ if(snap.exists()){ products = snap.val(); renderProducts(); } });
+
+function renderProducts(){
+  let list = document.getElementById('productList'); list.innerHTML='';
+  Object.keys(products).forEach(id=>{
+    let p = products[id];
+    list.innerHTML += `<div class="card"><div class="card-top"><img src="${p.images[0]}" onerror="this.src='https://via.placeholder.com/100'"><div style="flex:1"><input id="title-${id}" value="${p.title}" style="font-weight:800"><div class="grid2"><div><span class="label">PRICE</span><input type="number" id="price-${id}" value="${p.price}"></div><div><span class="label">ID</span><input value="${id}" disabled></div></div></div></div><span class="label">IMAGES comma</span><input id="imgs-${id}" value="${p.images.join(',')}"><span class="label">SIZES comma</span><input id="sizes-${id}" value="${p.sizes.join(',')}"><span class="label">STOCK M:3,L:7</span><input id="stock-${id}" value="${Object.entries(p.stock||{}).map(([k,v])=>k+':'+v).join(',')}"><div class="btns"><button class="btn-save" onclick="saveOne('${id}')">SAVE TO CLOUD</button><button class="btn-del" onclick="deleteOne('${id}')">DELETE</button></div></div>`;
+  });
 }
 
-let allOrders = JSON.parse(localStorage.getItem('critzOrders')||'[]');
-function render(){
-  let q=document.getElementById('search').value.toLowerCase();
-  let orders=allOrders.filter(o=>`${o.id} ${o.customer.fullName} ${o.customer.phone} ${o.customer.email} ${o.state}`.toLowerCase().includes(q));
-  document.getElementById('count').innerText=allOrders.length;
-  document.getElementById('paidCount').innerText=allOrders.filter(o=>o.status==='PAID').length;
-  document.getElementById('revenue').innerText=allOrders.filter(o=>o.status==='PAID').reduce((s,o)=>s+o.total,0).toLocaleString();
-  let list=document.getElementById('list');list.innerHTML='';
-  if(orders.length===0){list.innerHTML='<p style="color:#555;text-align:center;margin-top:20px">No orders</p>';return;}
-  orders.forEach((o)=>{
-    let idx=allOrders.indexOf(o);
-    let paidBadge=o.status==='PAID'?`<span class="badge badge-paid">PAID ✅</span>`:`<span class="badge badge-unpaid">UNPAID</span>`;
-    let modeBadge=o.mode==='DELIVERY'?`<span class="badge badge-delivery">${o.mode} - ${o.state} - ₦${o.shipFee.toLocaleString()}</span>`:`<span class="badge badge-pickup">${o.mode}</span>`;
-    list.innerHTML+=`<div class="order">
-      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px"><span class="id">${o.id}</span><div>${paidBadge} ${modeBadge}</div></div>
-      <div class="date">${o.date}</div><div class="ref">Ref: ${o.paystack_ref||o.id}</div>
-      <div class="cust">
-        Name: ${o.customer.fullName}<br>
-        Phone: <a href="tel:${o.customer.phone}" style="color:#25D366;text-decoration:none">${o.customer.phone}</a> | <a href="https://wa.me/${o.customer.phone.replace(/\D/g,'')}" target="_blank" style="color:#25D366">WhatsApp</a><br>
-        Email: ${o.customer.email||'None'}<br>
-        State: <b style="color:#fff">${o.state}</b><br>
-        Street: ${o.customer.street}<br>
-        Building: ${o.customer.building}<br>
-        City: ${o.customer.city}<br>
-        Landmark: ${o.customer.landmark||'None'}
-      </div>
-      ${o.items.map(it=>`<div class="item"><span>• ${it.name} | ${it.size} x${it.qty}</span><span>₦${(it.price*it.qty).toLocaleString()}</span></div>`).join('')}
-      <div class="total"><span>Sub ₦${o.subtotal.toLocaleString()} + Ship ₦${o.shipFee.toLocaleString()}</span><span>TOTAL ₦${o.total.toLocaleString()}</span></div>
-      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
-        <button class="btn btn-wa" onclick="window.open('https://wa.me/${o.customer.phone.replace(/\D/g,'')}?text=Hello ${o.customer.fullName}, order ${o.id} confirmed - ₦${o.total.toLocaleString()}','_blank')">WHATSAPP</button>
-        <button class="btn btn-del" onclick="let a=JSON.parse(localStorage.getItem('critzOrders'));a.splice(${idx},1);localStorage.setItem('critzOrders',JSON.stringify(a));location.reload()">DELETE</button>
-      </div>
-    </div>`;
-  });
+window.saveOne = async function(id){
+  let title = document.getElementById(`title-${id}`).value;
+  let price = parseInt(document.getElementById(`price-${id}`).value);
+  let images = document.getElementById(`imgs-${id}`).value.split(',').map(s=>s.trim()).filter(Boolean);
+  let sizes = document.getElementById(`sizes-${id}`).value.split(',').map(s=>s.trim()).filter(Boolean);
+  let stockStr = document.getElementById(`stock-${id}`).value;
+  let stock={}; stockStr.split(',').forEach(x=>{let [k,v]=x.split(':'); if(k&&v) stock[k.trim()]=parseInt(v)});
+  products[id] = {...products[id], title, price, images, sizes, stock};
+  await set(ref(db, `products/${id}`), products[id]);
+  document.getElementById('status').innerText = `${title} saved to cloud ✓`;
 }
-function exportCSV(){
-  let csv='ID,Ref,Date,Status,Mode,State,Ship,Total,Name,Phone,Email,Street,Building,City,Landmark,Items\n';
-  allOrders.forEach(o=>{
-    let items=o.items.map(it=>`${it.name} ${it.size} x${it.qty}`).join('; ');
-    csv+=`"${o.id}","${o.paystack_ref}","${o.date}","${o.status}","${o.mode}","${o.state}",${o.shipFee},${o.total},"${o.customer.fullName}","${o.customer.phone}","${o.customer.email}","${o.customer.street}","${o.customer.building}","${o.customer.city}","${o.customer.landmark}","${items}"\n`;
+window.deleteOne = async function(id){ if(!confirm('Delete?')) return; delete products[id]; await set(ref(db, 'products'), products); }
+window.addNew = async function(){
+  let id = prompt('Enter new ID e.g. hoodie1 (no space)');
+  if(!id || products[id]){alert('Invalid or exists'); return}
+  products[id] = {title:"NEW PRODUCT", price:20000, images:["polo.png"], sizes:["M","L","XL"], stock:{M:5,L:5,XL:5}};
+  await set(ref(db, `products/${id}`), products[id]);
+}
+function loadOrders(){
+  onValue(ref(db, 'orders'), (snap)=>{
+    let orders = snap.val() || {}; let list = document.getElementById('orderList'); list.innerHTML='';
+    let arr = Object.values(orders).reverse();
+    if(arr.length===0) list.innerHTML='<p style="font-size:10px;color:#666">No orders yet</p>';
+    arr.forEach(o=>{ list.innerHTML += `<div class="card" style="border-left:3px solid #e10600"><b style="font-size:11px">${o.id}</b><div style="font-size:10px;color:#aaa;margin-top:4px">${o.date||''}<br>${o.customer?.fullName||''} - ${o.customer?.phone||''}<br>Total: ₦${o.total?.toLocaleString()}<br>${o.items?.map(i=>i.name+' ('+i.size+') x'+i.qty).join('<br>')||''}</div></div>`; });
   });
-  let blob=new Blob([csv],{type:'text/csv'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='critz_orders.csv';a.click();
 }
 </script>
 </body>

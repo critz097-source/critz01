@@ -2,158 +2,132 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>SHOP - CRITZ</title>
 <style>
 :root{--red:#e10600}
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;-webkit-tap-highlight-color:transparent}
 body{background:#000 url('https://i.pinimg.com/1200x/c6/f5/71/c6f571c6e70de06b3485e3fb833f615d.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh}
-body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:-1}
-body.no-scroll{overflow:hidden}
-header{position:fixed;top:0;width:100%;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;z-index:20;background:rgba(0,0,0,0.9);border-bottom:1px solid rgba(255,255,255,0.12)}
-.logo{font-size:18px;font-weight:900;letter-spacing:1px}.logo span{color:var(--red)}
-.nav{display:flex;gap:18px;align-items:center}
-.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:11px;font-weight:800}
-.nav a.active{color:#fff;border-bottom:2px solid var(--red);padding-bottom:2px}
+body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:-1}
+body.no-scroll{overflow:hidden;position:fixed;width:100%}
+header{position:fixed;top:0;width:100%;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;z-index:20;background:rgba(255,255,255,0.06);backdrop-filter:blur(25px) saturate(200%);border-bottom:1px solid rgba(255,255,255,0.18)}
+.logo{font-size:18px;font-weight:900}.logo span{color:var(--red)}
+.nav{display:flex;gap:18px;align-items:center}.nav a{color:rgba(255,255,255,0.85);text-decoration:none;font-size:11px;font-weight:800}.nav a.active{color:#fff;border-bottom:2px solid var(--red);padding-bottom:2px}
 .cart-badge{background:var(--red);color:#fff;font-size:9px;padding:2px 5px;border-radius:50%;margin-left:3px;font-weight:900}
 .products{padding:80px 20px 30px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto}
-.product-card{background:rgba(18,18,18,0.9);border:1px solid rgba(255,255,255,0.15);border-radius:12px;overflow:hidden;text-align:center;display:flex;flex-direction:column;transform:scale(0.945);transform-origin:top center;width:100%}
-
-/* FIXED TO FIT VERY WELL */
-.img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:#0f0f0f;position:relative}
-.img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-
-.product-card h3{font-size:9px;margin:10px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;text-transform:uppercase}
+.product-card{background:rgba(255,255,255,0.07);backdrop-filter:blur(22px) saturate(180%);border:1px solid rgba(255,255,255,0.22);border-radius:18px;overflow:hidden;text-align:center;display:flex;flex-direction:column;transform:scale(0.945)}
+.img-wrap{width:100%;aspect-ratio:1/1;overflow:hidden;background:rgba(0,0,0,0.25)}.img-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.product-card h3{font-size:9px;margin:12px 6px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:800;text-transform:uppercase;letter-spacing:0.8px}
 .price{color:var(--red);font-size:12px;font-weight:900;margin-bottom:8px}
-.view-btn{width:calc(100% - 14px);background:var(--red);color:#fff;border:none;padding:11px;border-radius:7px;font-size:9.5px;font-weight:900;margin:0 7px 9px;letter-spacing:1px}
-@media(max-width:768px){.products{grid-template-columns:repeat(2,1fr);gap:10px;padding:70px 8px 20px}.product-card{transform:scale(0.966)}.img-wrap{aspect-ratio:4/5}}
-.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:999;opacity:0;visibility:hidden;transition:0.3s}
-.drawer-overlay.active{opacity:1;visibility:visible}
-.drawer{position:fixed;top:0;right:-100%;width:86%;max-width:360px;height:100%;background:#0a0a0a;border-left:1px solid rgba(255,255,255,0.15);z-index:1000;transition:right 0.35s ease;display:flex;flex-direction:column}
-.drawer.active{right:0}
-.drawer-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.1)}
-.drawer-top h3{font-size:11px;letter-spacing:2px;color:rgba(255,255,255,0.6)}
-.close-x{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:18px;display:grid;place-items:center}
-.drawer-img-wrap{width:100%;height:32vh;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:12px}
-.drawer-img-wrap::-webkit-scrollbar{display:none}
-.drawer-img-wrap img{width:75%;min-width:75%;height:100%;object-fit:cover;border-radius:12px;scroll-snap-align:center;background:#111;border:1px solid rgba(255,255,255,0.15)}
-.dots-wrap{display:flex;gap:5px;justify-content:center;padding:8px 0}
-.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25)}.dot.active{background:#fff;width:16px}
+.view-btn{width:calc(100% - 14px);background:rgba(225,6,0,0.85);color:#fff;border:1px solid rgba(255,255,255,0.2);padding:11px;border-radius:10px;font-size:9.5px;font-weight:900;margin:0 7px 9px;letter-spacing:1px;cursor:pointer}
+@media(max-width:768px){.products{grid-template-columns:repeat(2,1fr);gap:12px;padding:70px 8px 20px}.product-card{transform:scale(0.966)}.img-wrap{aspect-ratio:4/5}}
+.drawer-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);z-index:999;opacity:0;visibility:hidden;transition:all 0.35s}.drawer-overlay.active{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:-100%;width:86%;max-width:360px;height:100%;background:rgba(15,15,15,0.65);backdrop-filter:blur(30px) saturate(200%);border-left:1px solid rgba(255,255,255,0.22);z-index:1000;transition:right 0.4s cubic-bezier(0.22,1,0.36,1);display:flex;flex-direction:column}.drawer.active{right:0}
+.drawer-top{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.12)}
+.close-x{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.18);color:#fff;font-size:18px;display:grid;place-items:center;cursor:pointer}
+.drawer-img-wrap{width:100%;height:32vh;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:12px}.drawer-img-wrap::-webkit-scrollbar{display:none}
+.drawer-img-wrap img{width:75%;min-width:75%;height:100%;object-fit:cover;border-radius:14px;scroll-snap-align:center;background:#111;border:1px solid rgba(255,255,255,0.18)}
+.dots-wrap{display:flex;gap:5px;justify-content:center;padding:8px 0}.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.25)}.dot.active{background:#fff;width:16px}
 .drawer-content{padding:14px 16px;flex:1;overflow-y:auto;padding-bottom:110px}
-.drawer-content h2{font-size:14px;font-weight:900;margin-bottom:4px}
-.d-price{color:var(--red);font-size:15px;font-weight:900;margin-bottom:14px}
+.drawer-content h2{font-size:14px;font-weight:900;margin-bottom:4px}.d-price{color:var(--red);font-size:15px;font-weight:900;margin-bottom:14px}
 .opt-title{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.5);margin-bottom:8px;font-weight:700}
-.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.size-btn{padding:10px 14px;min-width:44px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.07);color:#fff;border-radius:8px;font-weight:800;font-size:12px}
-.size-btn.active{background:#fff;color:#000}
-.female-btn-under{width:100%;padding:12px;background:transparent;border:1px solid #fff;color:#fff;border-radius:10px;font-size:10px;font-weight:900;letter-spacing:1.2px;margin-bottom:16px;display:none;transition:0.2s}
-.female-btn-under.show{display:block}
-.female-btn-under.selected{background:#fff;color:#000;border-color:#fff}
-.qty-box{display:flex;align-items:center;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;width:140px;overflow:hidden;margin-bottom:18px}
-.qty-btn{width:44px;height:40px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:18px}
-.qty-num{flex:1;text-align:center;font-weight:900}
-.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:10px;background:#000;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:8px}
-.btn-big{width:100%;padding:13px;border:none;border-radius:10px;font-weight:900;font-size:11px}
-.btn-cart{background:#fff;color:#000}.btn-buy{background:var(--red);color:#fff}
+.sizes{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.size-btn{padding:10px 14px;min-width:44px;border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.08);color:#fff;border-radius:10px;font-weight:800;font-size:12px;cursor:pointer}.size-btn.active{background:#fff;color:#000;border-color:#fff}
+.size-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.size-link{font-size:9px;color:rgba(255,255,255,0.6);text-decoration:underline;cursor:pointer;font-weight:800;letter-spacing:1px}
+.urgency{font-size:10px;font-weight:800;color:#ffcc00;background:rgba(255,204,0,0.12);border:1px solid rgba(255,204,0,0.3);padding:8px 10px;border-radius:8px;margin-bottom:12px;display:none;animation:pulse 1.2s infinite}.urgency.show{display:block}.urgency.low{color:#ff4d4d;border-color:rgba(255,77,77,0.4);background:rgba(255,77,77,0.12)}@keyframes pulse{0%{opacity:1}50%{opacity:.6}100%{opacity:1}}
+.female-btn-under{width:100%;padding:12px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.4);color:#fff;border-radius:12px;font-size:10px;font-weight:900;letter-spacing:1.2px;margin-bottom:16px;display:none;cursor:pointer}.female-btn-under.show{display:block}.female-btn-under.selected{background:#fff;color:#000}
+.qty-box{display:flex;align-items:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:12px;width:140px;overflow:hidden;margin-bottom:18px}.qty-btn{width:44px;height:40px;background:rgba(255,255,255,0.08);border:none;color:#fff;font-size:18px;cursor:pointer}.qty-num{flex:1;text-align:center;font-weight:900}
+.btn-stack{position:absolute;bottom:0;left:0;width:100%;padding:12px;background:rgba(0,0,0,0.4);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.12);display:flex;flex-direction:column;gap:8px}.btn-big{width:100%;padding:14px;border:none;border-radius:12px;font-weight:900;font-size:11px;cursor:pointer}.btn-cart{background:rgba(255,255,255,0.95);color:#000}.btn-buy{background:var(--red);color:#fff}
+.size-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;display:none;align-items:center;justify-content:center;padding:12px;backdrop-filter:blur(10px)}.size-modal.show{display:flex}.size-modal-box{background:#121212;border:1px solid rgba(255,255,255,0.15);border-radius:16px;padding:16px;max-width:400px;width:100%}.size-modal-box h2{font-size:13px;font-weight:900;margin-bottom:12px}.size-table{width:100%;border-collapse:collapse;font-size:11px}.size-table th{color:rgba(255,255,255,0.5);font-size:9px;text-align:left;padding:8px;border-bottom:1px solid rgba(255,255,255,0.1)}.size-table td{padding:10px 8px;border-bottom:1px solid rgba(255,255,255,0.06);font-weight:700}.size-modal-close{width:100%;margin-top:14px;padding:12px;background:#fff;color:#000;border:none;border-radius:10px;font-weight:900;font-size:11px;cursor:pointer}
+#loading{padding:80px 20px;text-align:center;font-size:12px;color:#888}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">CRI<span>TZ</span></div>
-  <div class="nav"><a href="index.html">HOME</a><a href="products.html" class="active">SHOP</a><a href="cart.html">CART <span class="cart-badge" id="nav-cart">0</span></a></div>
-</header>
-<section class="products">
-  <div class="product-card"><div class="img-wrap"><img src="polo.png"></div><h3>CRITZ POLO WHITE AND BLACK</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="polo2.png"></div><h3>CRITZ POLO PINK AND WHITE</h3><div class="price">₦37,000</div><button class="view-btn" onclick="openDrawer('polo2')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="sleeve.png"></div><h3>LIFESTYLE SLEEVE BLACK</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="sleeve2.png"></div><h3>LIFESTYLE SLEEVE WHITE</h3><div class="price">₦25,000</div><button class="view-btn" onclick="openDrawer('sleeve2')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="tees.png"></div><h3>CRITZ KILLER TEE</h3><div class="price">₦15,000</div><button class="view-btn" onclick="openDrawer('killer')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="tees2.png"></div><h3>CRITZ KILLER TEE</h3><div class="price">₦15,000</div><button class="view-btn" onclick="openDrawer('killer2')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="joggers.png"></div><h3>CRITZ JOGGERS</h3><div class="price">₦30,000</div><button class="view-btn" onclick="openDrawer('joggers')">VIEW</button></div>
-  <div class="product-card"><div class="img-wrap"><img src="joggers2.png"></div><h3>CRITZ JOGGERS</h3><div class="price">₦30,000</div><button class="view-btn" onclick="openDrawer('joggers2')">VIEW</button></div>
+<header><div class="logo">CRI<span>TZ</span></div><div class="nav"><a href="index.html">HOME</a><a href="products.html" class="active">SHOP</a><a href="cart.html">CART <span class="cart-badge" id="nav-cart">0</span></a></div></header>
+<div id="loading">Loading products from cloud...</div>
+<section class="products" id="productsGrid" style="display:none"></section>
 
-</section>
 <div class="drawer-overlay" id="overlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-top"><h3>SELECT OPTIONS</h3><button class="close-x" onclick="closeDrawer()">✕</button></div>
   <div class="drawer-img-wrap" id="drawer-images"></div>
   <div class="dots-wrap" id="dots"></div>
   <div class="drawer-content">
-    <h2 id="drawer-title"></h2>
-    <div class="d-price" id="drawer-price"></div>
-    <div class="opt-title" id="size-label">SIZE: M</div>
+    <h2 id="drawer-title"></h2><div class="d-price" id="drawer-price"></div>
+    <div class="size-meta"><div class="opt-title" id="size-label" style="margin:0">SIZE: M</div><span class="size-link" onclick="openSizeChart()">📏 SIZE CHART</span></div>
     <div class="sizes" id="size-options"></div>
+    <div id="stockUrgency" class="urgency"></div>
     <button class="female-btn-under" id="femaleBtn" onclick="toggleFemale()">FEMALE CROPPED POLO</button>
     <div class="qty-box"><button class="qty-btn" onclick="changeQty(-1)">−</button><div class="qty-num" id="qty">1</div><button class="qty-btn" onclick="changeQty(1)">+</button></div>
   </div>
-  <div class="btn-stack">
-    <button class="btn-big btn-cart" onclick="addToCartFromDrawer()">ADD TO CART</button>
-    <button class="btn-big btn-buy" onclick="buyNow()">BUY IT NOW</button>
-  </div>
+  <div class="btn-stack"><button class="btn-big btn-cart" onclick="addToCartFromDrawer()">ADD TO CART</button><button class="btn-big btn-buy" onclick="buyNow()">BUY IT NOW</button></div>
 </div>
-<script>
-const products={
-  polo:{title:"CRITZ POLO WHITE AND BLACK",price:37000,images:["polo.png","polopic.jpeg","femalecop.jpeg"],sizes:["M","L","XL","XXL"], female:true, femaleTitle:"CRITZ POLO WHITE - FEMALE CROPPED POLO", femaleImg:"femalecop.jpeg"},
-  polo2:{title:"CRITZ POLO PINK AND WHITE",price:37000,images:["polo2.png","polopic2.jpeg","polopic3.jpeg"],sizes:["M","L","XL","XXL"], female:true, femaleTitle:"CRITZ POLO PINK - FEMALE CROPPED POLO", femaleImg:"polopic3.jpeg"},
-  sleeve:{title:"LIFESTYLE SLEEVE BLACK",price:25000,images:["sleeve.png","swag.jpeg"],sizes:["M","L","XL"]},
-  sleeve2:{title:"LIFESTYLE SLEEVE WHITE",price:25000,images:["sleeve2.png","lifestyle.jpeg"],sizes:["M","L","XL","XXL"]},
-  killer:{title:"KILLER TEE",price:15000,images:["tees.png","crop.jpeg"],sizes:["M","L","XL","XXL"]},
-  killer2:{title:"KILLER TEE",price:15000,images:["tees2.png","crop2.jpeg"],sizes:["M","L","XL"]},
-  joggers:{title:"CRITZ JOGGERS",price:30000,images:["joggers.png","joggers2.jpeg"],sizes:["M","L","XL"]},
-  joggers2:{title:"CRITZ JOGGERS",price:30000,images:["joggers2.png","joggers3.jpeg"],sizes:["M","L","XL"]},
+
+<div class="size-modal" id="sizeModal" onclick="if(event.target==this)closeSizeChart()"><div class="size-modal-box"><h2>CRITZ SIZE CHART (cm)</h2><table class="size-table"><tr><th>SIZE</th><th>CHEST</th><th>LENGTH</th><th>FITS</th></tr><tr><td>S</td><td>48</td><td>68</td><td>36-38"</td></tr><tr><td>M</td><td>51</td><td>70</td><td>38-40"</td></tr><tr><td>L</td><td>54</td><td>73</td><td>40-42"</td></tr><tr><td>XL</td><td>57</td><td>75</td><td>42-44"</td></tr><tr><td>XXL</td><td>60</td><td>78</td><td>44-46"</td></tr></table><p style="font-size:9px;color:rgba(255,255,255,0.5);margin-top:10px">Model 6'0 wearing L. Female cropped is 8cm shorter.</p><button class="size-modal-close" onclick="closeSizeChart()">GOT IT</button></div></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBFvtqQOELgZyVxvmVqUJz0Lcx62PsEso",
+  authDomain: "critz-aa676.firebaseapp.com",
+  databaseURL: "https://critz-aa676-default-rtdb.firebaseio.com",
+  projectId: "critz-aa676",
+  storageBucket: "critz-aa676.firebasestorage.app",
+  messagingSenderId: "350216428006",
+  appId: "1:350216428006:web:3a14f08c330cb819629e27"
 };
-let currentProduct=null, originalProduct=null, selectedSize=null, qty=1, femaleSelected=false;
-function updateNavCart(){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];document.getElementById('nav-cart').innerText=c.reduce((s,i)=>s+i.qty,0)}
-function openDrawer(id){
- originalProduct=JSON.parse(JSON.stringify(products[id]));
- currentProduct=products[id];
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let products = {};
+let currentProduct=null, originalProduct=null, selectedSize=null, qty=1, femaleSelected=false, currentId=null;
+
+onValue(ref(db, 'products'), (snap)=>{
+  if(snap.exists()){
+    products = snap.val();
+    document.getElementById('loading').style.display='none';
+    document.getElementById('productsGrid').style.display='grid';
+    renderGrid();
+  } else {
+    document.getElementById('loading').innerText = 'No products yet. Go to admin.html to add.';
+  }
+});
+
+function renderGrid(){
+  let grid=document.getElementById('productsGrid'); grid.innerHTML='';
+  Object.keys(products).forEach(id=>{
+    let p=products[id];
+    grid.innerHTML+=`<div class="product-card"><div class="img-wrap"><img src="${p.images[0]}" loading="lazy" onerror="this.src='https://via.placeholder.com/300'"></div><h3>${p.title}</h3><div class="price">₦${p.price.toLocaleString()}</div><button class="view-btn" onclick="openDrawer('${id}')">VIEW</button></div>`;
+  });
+  updateNavCart();
+}
+
+window.updateNavCart = function(){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];let el=document.getElementById('nav-cart'); if(el) el.innerText=c.reduce((s,i)=>s+i.qty,0)}
+window.openDrawer = function(id){
+ currentId=id; originalProduct=JSON.parse(JSON.stringify(products[id])); currentProduct=products[id];
  selectedSize=currentProduct.sizes[0];qty=1;femaleSelected=false;
  document.getElementById('drawer-title').innerText=currentProduct.title;
  document.getElementById('drawer-price').innerText=`₦${currentProduct.price.toLocaleString()}.00`;
  document.getElementById('qty').innerText=qty;
- renderImages(currentProduct.images);
- renderSizes();
+ renderImages(currentProduct.images); renderSizes();
  document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`;
+ updateUrgency(selectedSize);
  let fBtn=document.getElementById('femaleBtn');
  if(currentProduct.female){fBtn.classList.add('show'); fBtn.classList.remove('selected'); fBtn.innerText="FEMALE CROPPED POLO";} else {fBtn.classList.remove('show')}
  document.body.classList.add('no-scroll');document.getElementById('overlay').classList.add('active');document.getElementById('drawer').classList.add('active');
 }
-function renderImages(imgs){
- const imgDiv=document.getElementById('drawer-images');imgDiv.innerHTML='';
- imgs.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" onerror="this.src='https://via.placeholder.com/600x600/111/fff?text=CRITZ'">`;});
- const dotsDiv=document.getElementById('dots');dotsDiv.innerHTML='';
- imgs.forEach((_,k)=>{dotsDiv.innerHTML+=`<div class="dot ${k===0?'active':''}"></div>`;});
- imgDiv.onscroll=()=>{let i=Math.round(imgDiv.scrollLeft/(imgDiv.clientWidth*0.75+10));document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));};
-}
-function renderSizes(){
- const sizeDiv=document.getElementById('size-options');sizeDiv.innerHTML='';
- currentProduct.sizes.forEach((s,i)=>{sizeDiv.innerHTML+=`<button class="size-btn ${i===0?'active':''}" onclick="selectSize('${s}',this)">${s}</button>`;});
-}
-function toggleFemale(){
-  let fBtn=document.getElementById('femaleBtn');
-  if(!femaleSelected){
-    femaleSelected=true;
-    fBtn.classList.add('selected');
-    fBtn.innerText="FEMALE CROPPED - SELECTED ✓ (TAP TO REMOVE)";
-    document.getElementById('drawer-title').innerText=originalProduct.femaleTitle;
-    renderImages([originalProduct.femaleImg]);
-    currentProduct={...originalProduct, title:originalProduct.femaleTitle, images:[originalProduct.femaleImg]};
-  } else {
-    femaleSelected=false;
-    fBtn.classList.remove('selected');
-    fBtn.innerText="FEMALE CROPPED POLO";
-    document.getElementById('drawer-title').innerText=originalProduct.title;
-    renderImages(originalProduct.images);
-    currentProduct={...originalProduct};
-    renderSizes();
-  }
-}
-function closeDrawer(){document.body.classList.remove('no-scroll');document.getElementById('overlay').classList.remove('active');document.getElementById('drawer').classList.remove('active')}
-function selectSize(s,el){selectedSize=s;document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`}
-function changeQty(v){qty=Math.max(1,qty+v);document.getElementById('qty').innerText=qty}
-function addToCartFromDrawer(){let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];let key=document.getElementById('drawer-title').innerText+'-'+selectedSize;let ex=cart.find(i=>i.key===key);if(ex)ex.qty+=qty;else cart.push({key,name:document.getElementById('drawer-title').innerText,size:selectedSize,price:currentProduct.price,img:currentProduct.images[0],qty});localStorage.setItem('stylevaultCart',JSON.stringify(cart));updateNavCart();closeDrawer()}
-function buyNow(){addToCartFromDrawer();setTimeout(()=>location.href='cart.html',200)}
-updateNavCart();
+window.renderImages = function(imgs){const imgDiv=document.getElementById('drawer-images');imgDiv.innerHTML='';imgs.forEach(img=>{imgDiv.innerHTML+=`<img src="${img}" loading="lazy" onerror="this.src='https://via.placeholder.com/600'">`;});const dotsDiv=document.getElementById('dots');dotsDiv.innerHTML='';imgs.forEach((_,k)=>{dotsDiv.innerHTML+=`<div class="dot ${k===0?'active':''}"></div>`;});imgDiv.onscroll=()=>{let i=Math.round(imgDiv.scrollLeft/(imgDiv.clientWidth*0.75+10));document.querySelectorAll('.dot').forEach((d,idx)=>d.classList.toggle('active',idx===i));};}
+window.renderSizes = function(){const sizeDiv=document.getElementById('size-options');sizeDiv.innerHTML='';currentProduct.sizes.forEach((s,i)=>{sizeDiv.innerHTML+=`<button class="size-btn ${i===0?'active':''}" onclick="selectSize('${s}',this)">${s}</button>`;});}
+window.toggleFemale = function(){let fBtn=document.getElementById('femaleBtn');if(!femaleSelected){femaleSelected=true;fBtn.classList.add('selected');fBtn.innerText="FEMALE CROPPED - SELECTED ✓";document.getElementById('drawer-title').innerText=originalProduct.femaleTitle;renderImages([originalProduct.femaleImg]);currentProduct={...originalProduct, title:originalProduct.femaleTitle, images:[originalProduct.femaleImg]};}else{femaleSelected=false;fBtn.classList.remove('selected');fBtn.innerText="FEMALE CROPPED POLO";document.getElementById('drawer-title').innerText=originalProduct.title;renderImages(originalProduct.images);currentProduct={...originalProduct};renderSizes();}}
+window.closeDrawer = function(){document.body.classList.remove('no-scroll');document.getElementById('overlay').classList.remove('active');document.getElementById('drawer').classList.remove('active')}
+window.selectSize = function(s,el){selectedSize=s;document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');document.getElementById('size-label').innerText=`SIZE: ${selectedSize}`;updateUrgency(s);}
+window.updateUrgency = function(size){let stock=(products[currentId]?.stock && products[currentId].stock[size])?products[currentId].stock[size]:4;let box=document.getElementById('stockUrgency');box.classList.add('show');if(stock<=2){box.classList.add('low');box.innerHTML=`⚠️ Only ${stock} left in size ${size}! - Almost gone`;}else if(stock<=4){box.classList.remove('low');box.innerHTML=`🔥 Only ${stock} left in size ${size}! - Selling fast`;}else{box.classList.remove('low');box.innerHTML=`✅ In stock - ${stock} left in size ${size}`;}}
+window.openSizeChart = function(){document.getElementById('sizeModal').classList.add('show')}window.closeSizeChart = function(){document.getElementById('sizeModal').classList.remove('show')}
+window.changeQty = function(v){qty=Math.max(1,qty+v);document.getElementById('qty').innerText=qty}
+window.addToCartFromDrawer = function(){let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];let key=document.getElementById('drawer-title').innerText+'-'+selectedSize;let ex=cart.find(i=>i.key===key);if(ex)ex.qty+=qty;else cart.push({key,name:document.getElementById('drawer-title').innerText,size:selectedSize,price:currentProduct.price,img:currentProduct.images[0],qty});localStorage.setItem('stylevaultCart',JSON.stringify(cart));updateNavCart();closeDrawer()}
+window.buyNow = function(){addToCartFromDrawer();setTimeout(()=>location.href='cart.html',200)}
 </script>
 </body>
 </html>

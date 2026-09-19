@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 <title>CART - CRITZ</title>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <style>
-:root{--red:#e10600}
+:root{--red:#e10600;--green:#25D366}
 *{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Arial;-webkit-tap-highlight-color:transparent}
-html,body{overflow-x:hidden;width:100%}
-body{background:#000 url('background.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh;min-height:100dvh}
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+body{background:#000 url('https://i.pinimg.com/1200/c6/f5/71/c6f571c6e70de06b3485e3fb833f615d.jpg') no-repeat center center fixed;background-size:cover;color:#fff;min-height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;transform:translateZ(0)}
 body::before{content:"";position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:-1}
-header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(0,0,0,0.55);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.12)}
+header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(0,0,0,0.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.12)}
 .logo{font-size:18px;font-weight:900}.logo span{color:var(--red)}
 .nav{display:flex;gap:10px;align-items:center}.nav a{color:#fff;text-decoration:none;font-size:11px;font-weight:800;padding:8px 6px;border-radius:6px;min-height:36px;display:flex;align-items:center}.nav a.active{background:rgba(255,255,255,0.1)}
 .wrap{padding:68px 10px 24px;max-width:600px;margin:0 auto;width:100%}
 .title{font-size:18px;font-weight:900;margin-bottom:2px}.sub{font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:12px}
-.cart-item{background:rgba(18,18,18,0.6);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;display:flex;overflow:hidden;margin-bottom:10px;min-height:92px}
-.img-box{width:88px;min-width:88px;height:92px;background:#0e0e0e}.img-box img{width:100%;height:100%;object-fit:cover;display:block}
-.cart-info{flex:1;padding:10px 10px;display:flex;flex-direction:column;justify-content:center;min-width:0}
+.cart-item{background:rgba(18,18,18,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;display:flex;overflow:hidden;margin-bottom:10px;min-height:92px;transform:translateZ(0)}
+.img-box{width:88px;min-width:88px;height:92px;background:#0e0e0e;overflow:hidden}.img-box img{width:100%;height:100%;object-fit:cover;display:block}
+.cart-info{flex:1;padding:10px;display:flex;flex-direction:column;justify-content:center;min-width:0}
 .cart-info h3{font-size:11px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cart-info p{font-size:9px;color:rgba(255,255,255,0.5);margin:2px 0}
 .cart-price{color:var(--red);font-weight:900;font-size:13px}
 .qty-row{display:flex;align-items:center;gap:6px;margin-top:8px}
-.q-btn{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:18px;display:grid;place-items:center}
+.q-btn{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:18px;display:grid;place-items:center;cursor:pointer}
 .q-num{font-size:13px;font-weight:800;min-width:20px;text-align:center}
 .remove{margin-left:auto;background:rgba(225,6,0,0.18);border:1px solid rgba(225,6,0,0.35);color:#ff6b6b;padding:8px 12px;border-radius:9px;font-size:9px;font-weight:800;min-height:36px}
-.summary{margin-top:14px;background:rgba(18,18,18,0.65);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:12px}
+.summary{margin-top:14px;background:rgba(18,18,18,0.65);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:12px}
 .delivery-box{margin-bottom:14px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:10px}
 .delivery-options{display:flex;gap:8px;margin-bottom:10px}
 .delivery-opt{flex:1;padding:12px 8px;border-radius:11px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.06);text-align:center;cursor:pointer;min-height:58px;display:flex;flex-direction:column;justify-content:center}
@@ -43,7 +43,9 @@ header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:fl
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}
 .row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:10px;color:rgba(255,255,255,0.75)}
 .row.total{font-size:16px;font-weight:900;color:#fff;border-top:1px solid rgba(255,255,255,0.12);padding-top:12px;margin-top:12px}
-.checkout{width:100%;margin-top:14px;padding:16px;background:var(--red);border:none;color:#fff;border-radius:13px;font-weight:900;font-size:12px;min-height:52px;letter-spacing:1px}
+.checkout{width:100%;margin-top:14px;padding:16px;background:var(--red);border:none;color:#fff;border-radius:13px;font-weight:900;font-size:12px;min-height:52px;letter-spacing:1px;cursor:pointer}
+.whatsapp-btn{width:100%;margin-top:10px;padding:16px;background:var(--green);border:none;color:#fff;border-radius:13px;font-weight:900;font-size:12px;min-height:52px;letter-spacing:0.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 20px rgba(37,211,102,0.35)}
+.whatsapp-btn:active{transform:scale(0.98)}
 .continue{width:100%;margin-top:10px;padding:15px;background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.18);color:#fff;border-radius:13px;font-weight:800;font-size:11px;min-height:50px}
 .empty{text-align:center;padding:44px 16px;background:rgba(18,18,18,0.5);border:1px solid rgba(255,255,255,0.12);border-radius:16px}
 @media(max-width:360px){.grid2{grid-template-columns:1fr}}
@@ -54,7 +56,6 @@ header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:fl
   <div class="logo">CRI<span>TZ</span></div>
   <div class="nav"><a href="products.html">SHOP</a><a href="cart.html" class="active">🛍️ (<span id="cart-count">0</span>)</a></div>
 </header>
-
 <div class="wrap">
   <div class="title">YOUR CART</div>
   <div class="sub" id="item-count">0 ITEMS</div>
@@ -66,15 +67,14 @@ header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:fl
           <div class="delivery-opt active" id="opt-delivery" onclick="setDelivery('delivery')"><b>DELIVERY</b><span>Pay with order</span></div>
           <div class="delivery-opt" id="opt-pickup" onclick="setDelivery('pickup')"><b>SELF PICKUP</b><span>Free</span></div>
         </div>
-        <div class="note"><b>⏱ Delivery takes 1-2 weeks</b><br>Delivery fee paid with order via Paystack.</div>
+        <div class="note"><b>⏱ Delivery takes 1-2 weeks</b><br>Delivery fee selected below is paid along with your order.</div>
         <div class="ship-select-wrap show" id="ship-wrap">
           <select class="ship-select" id="state" onchange="handleStateChange()">
             <option value="" disabled selected>Select delivery region</option>
-            <option value="6800">Lagos - ₦6,800</option>
-            <option value="7000">Ibadan - ₦7,000</option>
-            <option value="7000">Calabar - ₦7,000</option>
+            <option value="5000">Lagos - ₦5,000</option>
+            <option value="7500">Ibadan - ₦7,500</option>
             <option value="8500">Abuja - ₦8,500</option>
-            <option value="8500">Other States - ₦8,500</option>
+            <option value="9000">Other States - ₦9,000</option>
           </select>
           <div class="other-state-box" id="otherStateBox">
             <div class="input-group"><label>Enter Your State *</label><input type="text" id="otherState" placeholder="e.g. Enugu, Kano..." oninput="calcTotal()"></div>
@@ -84,7 +84,7 @@ header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:fl
             <div class="input-group"><label>Full Name *</label><input type="text" id="fullName" placeholder="John Doe"></div>
             <div class="input-group"><label>Phone *</label><input type="tel" id="phone" placeholder="080..."></div>
           </div>
-          <div class="input-group"><label>Email * (for Paystack receipt)</label><input type="email" id="email" placeholder="john@gmail.com"></div>
+          <div class="input-group"><label>Email * (for Paystack)</label><input type="email" id="email" placeholder="john@gmail.com"></div>
           <div class="input-group"><label>Street Address *</label><input type="text" id="street" placeholder="12 Allen Ave"></div>
           <div class="grid2">
             <div class="input-group"><label>Building / House No *</label><input type="text" id="building" placeholder="Building 5, Flat 2"></div>
@@ -94,18 +94,23 @@ header{position:fixed;top:0;left:0;right:0;height:56px;padding:0 12px;display:fl
         </div>
       </div>
       <div class="row"><span>Subtotal</span><span id="subtotal">₦0</span></div>
-      <div class="row"><span id="ship-label">Shipping (Lagos)</span><span id="shipping">₦6,800</span></div>
+      <div class="row"><span id="ship-label">Shipping (Lagos)</span><span id="shipping">₦5,000</span></div>
       <div class="row total"><span>Total</span><span id="total">₦0</span></div>
-      <button class="checkout" id="payBtn" onclick="payWithPaystack()">PAY WITH PAYSTACK</button>
+      <button class="checkout" onclick="payWithPaystack()">PAY WITH PAYSTACK</button>
+      <button class="whatsapp-btn" onclick="orderViaWhatsApp()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.05 4.94A9.82 9.82 0 0 0 12.03 2C6.52 2 2.03 6.5 2.03 12c0 1.76.46 3.48 1.33 5L2 22l5.14-1.35A9.9 9.9 0 0 0 12.03 22c5.51 0 10-4.5 10-10a9.8 9.8 0 0 0-2.98-7.06zM12.03 20.03a8 8 0 0 1-4.07-1.11l-.29-.17-3.05.8.81-2.97-.19-.3A8 8 0 0 1 12.03 4a8 8 0 0 1 5.67 13.66 7.98 7.98 0 0 1-5.67 2.37zm4.64-6.03c-.25-.13-1.49-.74-1.72-.82-.23-.09-.4-.13-.57.13s-.66.82-.81.99c-.15.17-.3.19-.55.06-.25-.12-1.05-.39-2-1.24-.74-.66-1.24-1.47-1.38-1.72-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.11-.57-1.38-.78-1.89-.2-.48-.41-.42-.57-.43h-.49c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.01 2.57c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.49-.61 1.7-1.2.21-.59.21-1.1.15-1.2-.06-.11-.23-.17-.48-.3z"/></svg>
+        ORDER ON WHATSAPP
+      </button>
       <button class="continue" onclick="location.href='products.html'">CONTINUE SHOPPING</button>
     </div>
   </div>
 </div>
-
 <script>
-const PAYSTACK_PUBLIC_KEY = 'pk_test_48c007acae4e84a88ade9561e73a5f5dd08916d9'; // <--- PUT YOUR PAYSTACK PUBLIC KEY HERE
-let currentSubtotal=0, deliveryMode='delivery';
+// PUT YOUR WHATSAPP NUMBER HERE - use 234 format, no +
+const WHATSAPP_NUMBER = '2348012345678'; // <-- CHANGE THIS
 
+const PAYSTACK_PUBLIC_KEY = 'pk_test_48c007acae4e84a88ade9561e73a5f5dd08916d9';
+let currentSubtotal=0, deliveryMode='delivery';
 function loadCart(){
   let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
   document.getElementById('cart-count').innerText=cart.reduce((s,i)=>s+i.qty,0);
@@ -113,30 +118,47 @@ function loadCart(){
   const list=document.getElementById('cart-list');
   if(cart.length===0){list.innerHTML=`<div class="empty"><h2 style="font-size:15px">Cart Empty</h2><a href="products.html" style="color:#e10600;text-decoration:none;font-weight:800;font-size:12px">GO TO SHOP →</a></div>`;document.getElementById('summary-box').style.display='none';return;}
   list.innerHTML='';let sub=0;
-  cart.forEach((item,idx)=>{sub+=item.price*item.qty;list.innerHTML+=`<div class="cart-item"><div class="img-box"><img src="${item.img}"></div><div class="cart-info"><h3>${item.name}</h3><p>SIZE: ${item.size}</p><div class="cart-price">₦${item.price.toLocaleString()}</div><div class="qty-row"><button class="q-btn" onclick="changeQty(${idx},-1)">−</button><div class="q-num">${item.qty}</div><button class="q-btn" onclick="changeQty(${idx},1)">+</button><button class="remove" onclick="removeItem(${idx})">REMOVE</button></div></div></div>`;});
+  cart.forEach((item,idx)=>{
+    sub+=item.price*item.qty;
+    list.innerHTML+=`<div class="cart-item"><div class="img-box"><img src="${item.img}" onerror="this.src='https://via.placeholder.com/200x200/111/fff?text=CRITZ'"></div><div class="cart-info"><h3>${item.name}</h3><p>SIZE: ${item.size}</p><div class="cart-price">₦${item.price.toLocaleString()}</div><div class="qty-row"><button class="q-btn" onclick="changeQty(${idx},-1)">−</button><div class="q-num">${item.qty}</div><button class="q-btn" onclick="changeQty(${idx},1)">+</button><button class="remove" onclick="removeItem(${idx})">REMOVE</button></div></div></div>`;
+  });
   currentSubtotal=sub;document.getElementById('subtotal').innerText=`₦${sub.toLocaleString()}`;document.getElementById('summary-box').style.display='block';calcTotal();
 }
 function setDelivery(m){deliveryMode=m;document.getElementById('opt-delivery').classList.toggle('active',m==='delivery');document.getElementById('opt-pickup').classList.toggle('active',m==='pickup');document.getElementById('ship-wrap').classList.toggle('show',m==='delivery');calcTotal();}
-function handleStateChange(){
-  const sel=document.getElementById('state');const box=document.getElementById('otherStateBox');
-  if(sel.selectedIndex>-1 && sel.options[sel.selectedIndex].text.includes('Other States')) box.classList.add('show'); else {box.classList.remove('show');document.getElementById('otherState').value='';}
-  calcTotal();
-}
-function calcTotal(){
-  let ship=0,label='Pickup - FREE';
-  if(deliveryMode==='delivery'){
-    const sel=document.getElementById('state');const other=document.getElementById('otherState').value.trim();
-    ship=sel.value?parseInt(sel.value):6800;
-    if(sel.value){label= sel.options[sel.selectedIndex].text.includes('Other States')? (other||'Other State') : sel.options[sel.selectedIndex].text.split(' - ')[0];} else {label='Lagos'}
-  }
-  window._shipFee=ship;window._shipLabel=label;
-  document.getElementById('ship-label').innerText=`Shipping (${label})`;
-  document.getElementById('shipping').innerText= deliveryMode==='pickup'? 'FREE' : `₦${ship.toLocaleString()}`;
-  document.getElementById('total').innerText=`₦${(currentSubtotal+ship).toLocaleString()}`;
-  window._total=currentSubtotal+ship;
-}
+function handleStateChange(){const sel=document.getElementById('state');const box=document.getElementById('otherStateBox');if(sel.selectedIndex>-1 && sel.options[sel.selectedIndex].text.includes('Other States')) box.classList.add('show'); else {box.classList.remove('show');document.getElementById('otherState').value='';}calcTotal();}
+function calcTotal(){let ship=0,label='Pickup - FREE';if(deliveryMode==='delivery'){const sel=document.getElementById('state');const other=document.getElementById('otherState').value.trim();ship=sel.value?parseInt(sel.value):5000;if(sel.value){label= sel.options[sel.selectedIndex].text.includes('Other States')? (other||'Other State') : sel.options[sel.selectedIndex].text.split(' - ')[0];} else {label='Lagos'}}window._shipFee=ship;window._shipLabel=label;document.getElementById('ship-label').innerText=`Shipping (${label})`;document.getElementById('shipping').innerText= deliveryMode==='pickup'? 'FREE' : `₦${ship.toLocaleString()}`;document.getElementById('total').innerText=`₦${(currentSubtotal+ (deliveryMode==='pickup'?0:ship)).toLocaleString()}`;window._total= deliveryMode==='pickup'? currentSubtotal : currentSubtotal+ship;}
 function changeQty(i,d){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];c[i].qty=Math.max(1,c[i].qty+d);localStorage.setItem('stylevaultCart',JSON.stringify(c));loadCart()}
 function removeItem(i){let c=JSON.parse(localStorage.getItem('stylevaultCart'))||[];c.splice(i,1);localStorage.setItem('stylevaultCart',JSON.stringify(c));loadCart()}
+
+function getFormData(){
+  return {
+    fn: document.getElementById('fullName').value.trim(),
+    ph: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    street: document.getElementById('street').value.trim(),
+    building: document.getElementById('building').value.trim(),
+    city: document.getElementById('city').value.trim(),
+    landmark: document.getElementById('landmark').value.trim(),
+    other: document.getElementById('otherState').value.trim(),
+    state: window._shipLabel,
+    shipFee: window._shipFee,
+    total: window._total
+  }
+}
+
+function orderViaWhatsApp(){
+  let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
+  if(cart.length===0){alert('Cart empty');return}
+  let d=getFormData();
+  if(deliveryMode==='delivery'){
+    if(!document.getElementById('state').value){alert('Select delivery region first');return}
+    if(!d.fn||!d.ph||!d.street||!d.city){alert('Fill Name, Phone, Street, City for WhatsApp order');return}
+  }
+  let itemsText = cart.map((i,idx)=>`${idx+1}. ${i.name}\n Size: ${i.size} | Qty: ${i.qty} | ₦${(i.price*i.qty).toLocaleString()}`).join('\n');
+  let message = `*NEW CRITZ ORDER* 🔥\n\n${itemsText}\n\n----------------\nSubtotal: ₦${currentSubtotal.toLocaleString()}\nShipping (${d.state}): ${deliveryMode==='pickup'?'FREE':'₦'+d.shipFee.toLocaleString()}\n*TOTAL: ₦${d.total.toLocaleString()}*\n\n*Customer Details:*\nName: ${d.fn||'Not provided - Pickup'}\nPhone: ${d.ph}\nEmail: ${d.email}\nAddress: ${d.street}, ${d.building}, ${d.city} ${d.landmark? '('+d.landmark+')':''}\nState: ${d.state}\nMode: ${deliveryMode==='delivery'?'Delivery':'Self Pickup'}\n\nSent from CRITZ website`;
+  let url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  window.open(url,'_blank');
+}
 
 function payWithPaystack(){
   let cart=JSON.parse(localStorage.getItem('stylevaultCart'))||[];
@@ -148,67 +170,26 @@ function payWithPaystack(){
   const st=document.getElementById('street').value.trim();
   const bd=document.getElementById('building').value.trim();
   const ct=document.getElementById('city').value.trim();
-  const lm=document.getElementById('landmark').value.trim();
-  const other=document.getElementById('otherState').value.trim();
-
   if(deliveryMode==='delivery'){
     if(!sel.value){alert('Select delivery region');return}
-    if(sel.options[sel.selectedIndex].text.includes('Other States') &&!other){alert('Enter your state');return}
-    if(!fn||!ph||!email||!st||!bd||!ct){alert('Fill all compulsory fields including Email');return}
-  } else {
-    if(!email){alert('Email required for Paystack receipt');return}
+    if(!fn||!ph||!email||!st||!bd||!ct){alert('Fill all compulsory fields');return}
   }
   if(!/\S+@\S+\.\S+/.test(email)){alert('Enter valid email');return}
-
-  let shipFee = deliveryMode==='delivery'? window._shipFee : 0;
-  let stateName = deliveryMode==='delivery'? window._shipLabel : 'Lagos Store';
-  let total = window._total;
-
   let handler = PaystackPop.setup({
     key: PAYSTACK_PUBLIC_KEY,
     email: email,
-    amount: total * 100, // kobo
+    amount: window._total * 100,
     currency: 'NGN',
     ref: 'CRITZ-'+Date.now(),
-    metadata: {
-      custom_fields: [
-        {display_name: "Customer Name", variable_name: "customer_name", value: fn||'Pickup'},
-        {display_name: "Phone", variable_name: "phone", value: ph},
-        {display_name: "State", variable_name: "state", value: stateName},
-        {display_name: "Address", variable_name: "address", value: `${st}, ${bd}, ${ct}, ${lm}`},
-        {display_name: "Shipping Fee", variable_name: "shipping_fee", value: shipFee},
-        {display_name: "Items", variable_name: "items", value: cart.map(i=>`${i.name} (${i.size}) x${i.qty}`).join(', ')}
-      ]
-    },
-    onClose: function(){ alert('Payment cancelled'); },
+    metadata: { custom_fields: [{display_name: "Customer", variable_name: "customer_name", value: fn||'PICKUP'}]},
+    onClose: function(){},
     callback: function(response){
-      // PAYMENT SUCCESS - SAVE TO ADMIN
-      let order={
-        id: response.reference,
-        paystack_ref: response.reference,
-        date: new Date().toLocaleString(),
-        mode: deliveryMode==='delivery'?'DELIVERY':'SELF PICKUP',
-        state: stateName,
-        shipFee: shipFee,
-        subtotal: currentSubtotal,
-        total: total,
-        customer:{fullName:fn||'PICKUP',phone:ph,email:email,street:st,building:bd,city:ct,landmark:lm,otherState:other},
-        items: cart,
-        status: 'PAID',
-        paid_at: new Date().toLocaleString()
-      };
-      let orders=JSON.parse(localStorage.getItem('critzOrders')||'[]');
-      orders.unshift(order);
-      localStorage.setItem('critzOrders',JSON.stringify(orders));
-      localStorage.setItem('lastOrder',JSON.stringify(order));
-      localStorage.removeItem('stylevaultCart');
-      alert(`Payment successful! Ref: ${response.reference}`);
-      window.location.href='order-success.html';
+      let order={ id: response.reference, date: new Date().toLocaleString(), total: window._total, customer:{fullName:fn}, items: cart, status: 'PAID'};
+      let orders=JSON.parse(localStorage.getItem('critzOrders')||'[]');orders.unshift(order);localStorage.setItem('critzOrders',JSON.stringify(orders));localStorage.removeItem('stylevaultCart');window.location.href='order-success.html';
     }
   });
   handler.openIframe();
 }
-
 loadCart();setDelivery('delivery');
 </script>
 </body>
